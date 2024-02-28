@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+
+<body>
+    <div>Manager Blog</div>
+    <div>
+            <input type="text" name="search" id="titleSearch">
+            <button id = "search-btn">search</button>
+    </div>
+    <div><a th:href="@{/blog/create}">Add new blog</a></div>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="blogList">
+
+            </tbody>
+        </table>
+        <button id = "loadMore">Load more</button>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+        <script>
+            console.log("actived");
+            let offSet = 20;
+            let limit = 20;
+            $(document).ready(function () {
+
+                loadBlogs(offSet);
+
+            });
+
+            $('#loadMore').click(function () {
+                offSet += limit;
+                console.log("load more blogs: " + offSet);
+                $('#blogList').empty();
+                loadBlogs(offSet);
+            });
+
+            $('#search-btn').click(function() {
+                console.log("do search");
+                $('#blogList').empty();
+                doSearch();
+            })
+
+            function loadBlogs(offSet) {
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "get",
+                    dataType: 'json',
+                    url: "http://localhost:8080/api/blog",
+                    success: function (blogList) {
+                     
+
+                        let count = 0;
+
+
+                        $.each(blogList, function (index, blog) {
+                            if (count >= offSet) {
+                                return false;
+                            }
+                            $('#blogList').append(
+                                '<tr>' +
+                                '<td>' + (index + 1) + '</td>' +
+                                '<td>' + blog.title + '</td>' +
+                                '<td>' + blog.date + '</td>' +
+                                '</tr>'
+                            );
+                            count++;
+                        })
+
+                        if (blogList.length === offSet) {
+                            $('#loadMore').hide();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching blog data:', status, error);
+                    }
+                })
+            }
+
+            function doSearch(){
+                let nameSearch = document.getElementById("titleSearch").value;
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "post",
+                    data: nameSearch,
+                    url: "http://localhost:8080/api/blog/search",
+                    success: function (blogList) {
+                        $.each(blogList, function (index, blog) {
+                            $('#blogList').append(
+                                '<tr>' +
+                                '<td>' + (index + 1) + '</td>' +
+                                '<td>' + blog.title + '</td>' +
+                                '<td>' + blog.date + '</td>' +
+                                '</tr>'
+                            );
+                        })
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching blog data:', status, error);
+                    }
+                })
+            }
+
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage blog</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div>Manager Blog</div>
+<div>
+    <form action="/blog/search" method="post">
+        <input type="text" th:name="search"><button type="submit">search</button>
+    </form>
+</div>
+<div><a th:href="@{/blog/create}">Add new blog</a></div>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Title</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog, loop: ${blogList}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${blog.title}"></td>
+            <td th:text="${#temporals.format(blog.getDate(), 'dd/MM/yyyy')}"></td>
+            <td><a th:href="@{/blog/detail/{idBlog}(idBlog = ${blog.getId()})}">View</a></td>
+            <td><a th:href="@{/blog/edit/{idBlog}(idBlog = ${blog.getId()})}">Edit</a></td>
+            <td><a th:href="@{/blog/delete/{idBlog}(idBlog = ${blog.getId()})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

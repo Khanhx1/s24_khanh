@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Book</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div><a th:href="@{/book/give-back}">Give book back</a></div>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+
+    <tr th:each="book, loop: ${bookList}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${book.getNameBook()}"></td>
+        <td th:text="${book.getQuantity()}"></td>
+        <td><a th:href="@{/book/detail/{id}(id = ${book.getIdBook()})}">Detail</a></td>
+    </tr>
+</table>
+</body>
+</html>

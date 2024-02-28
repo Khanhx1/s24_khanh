@@ -1,0 +1,154 @@
+khóa chính theo hàng thì chỉ có 1, ko để trống,..?
+
+BÀI VIẾT: bài viết - người dùng(n - n) : thì tạo 1 bảng trung gian lấy primary key là
+2 mã của người dùng và bài viết. 
+
+
+1NF: Không có thuộc tính đa trị
+2NF: phụ thuộc vào khóa chính
+3NF: không bắc cầu
+4NF: 
+
+sql: là ngôn ngữ giúp thực hiện quản trị csdl
+sql làm được: tạo csdl, tạo bảng, thêm hàng, thêm cột, thêm ràng buộc, sửa bảng, sủa hàng, sửa cột, tìm kiếm dữ liệu
+sql:
+loai 1: xây dựng: các câu lệnh tạo sửa xóa csdl và bảng
+loại 2: quản trị: các câu lệnh để thêm sửa xóa bản ghi
+loại 3: truy vấn: tìm kiếm
+select *
+from product where name like 'h%'; tìm kiếm bắt đầu bằng chữ h (%h kết thúc = chữ h)(%h% có chữ h trong từ)
+order by price desc, quantity; (xắp sếp)
+
+join: kết nối các bảng mà có qh với nhau(có khóa ngoại)
+
+full join: lấy toàn bộ bản ghi ở bảng rồi xếp chéo lên nhau. mỗi bản ghi ở bảng này thì sẽ nối với toàn
+bộ bản ghi 
+inner join lấy ra các bản ghi có điểm chung giữa hai bảng 
+left join = inner join + các phần tử ở bảng bên trái join mà có khóa ngoại bị null
+right join = inner join + các phần tử ở bảng bên phải join mà có khóa ngoại bị null
+
+khi nào cần join: khi muốn lấy dữ liệu từ nhiều bảng
+group by: giup nhóm có bảng ghi có giá trị giống nhau để tính toán
+
+Having: đặt điều kiện cho các hàm
+where: đặt điều kiện cho cột có sắn
+having nằm dưới group by
+where nằm trên group by
+
+// để truy xuất nhanh dùng cách gì??
+index
+chỉ select trường cần thiết
+giới hạn trả về với limit, top
+hạn chế dùng nhiều các toán tử ỏ mà thay bằng in
+Procedure
+Nâng cấp phần cứng
+----
+hạn chế group by => partition, over
+-----
+// view ko giúp truy xuất nhanh hơn
+
+View có lưu lại trong bộ nhớ khi tắt máy không?
+không lưu, query
+có thể từ view sửa giữ liệu trong bảng thật ko?
+-Có nhiều điều kiện đi kèm
+có các loại view nào?
+- view tự tạo
+- view hệ thống tạo: indexed, partitioned, hệ thống
+có mấy cách tạo view ?
+create view tên as
+
+index có mấy loại? cách tạo từng loại?
+- 2 loại: create clustered index, create non clustered index
+index được tổ chức thế nào? tại sao index nhanh
+khi chúng ta đánh 1 cột là index, cột đó sẽ đc sao chép ra 1 vùng nhớ và được sắp xếp, khi tìm kiếm trên cột đó thì sẽ chỉ
+duyệt ở vừng nhớ đã được tách. Phần dữ liệu của bản ghi tương ứng thì được tham chiếu tới.
+? khi nào nên và ko nên dùng index
+- dữ liệu lớn, truy vấn thường xuyên
+-dữ liệu nhỏ, dữ liệu thường xuyên thay đổi
+
+//-----//
+
+tại sao procedure giúp tăng tốc độ truy vấn?
+java------CSDL
+nếu cách bình thường trên java thì sẽ phải gửi 20 dòng code, còn procedure thì chỉ cần call 1 lệnh procedure
+và sẽ thực hiện hàm trong csdl
+làm thế nào để trả về 1 giá trị từ procedure
+
+// web : servlet,JSTL,JDBC
+
+---------------------------------
+--------------CSS--------------
+---------------------------------
+
+selector chỉ dùng cho internal, external 
+
+bộ chọn(selector): là cách để chúng ta viết css cho 1 hoặc nhiều thẻ 
+từ bên ngoài 
+// div sẽ chiếm 1 dòng(block)
+//thẻ block(p,h,..)
+//thẻ inline (span, a,..) - thường là thẻ input.
+//có thể chuyển display : sang các dạng => vào sửa tại css
+// position mặc dịnh là static ko cho phép top left
+// relative xác định theo vị trí mặc định
+absolte :
+xác định top, left theo vị trí góc trái trên màn hình 
+thẻ cha có relative: xaxsctop, left theo vị trí góc trái của thẻ cha.
+
+//justify content : space between
+over flow: auto
+// keyframe
+
+--------------------------------
+
+các kiểu chữ:
++ không chân
++ có chân
++ chữ viết tay
++ trang trí
++ monospace (các chữ bằng nhau) dùng trong code
+--nên dùng đồng bộ phông chữ
+
+cách dùng màu trong css:
++ mã hex
++ rgb(x,y,z)
++ rgba(x,y,z, alpha) (alpha lad độ mờ)
+
+các loại web (phân loại theo thể loai, mục đích)
++ MXH
++ Giải trí
++ Blog
++ thương mại
++ tin tức
++ forum
++ doanh nghiệp
++ giáo dục
+
+//(từ khóa css effect, học scss)
+
+***bài chính
+bootstrap là công cụ làm giao diện web dễ 
+hơn (ở mức cơ bản)
+
+ưu: độ phổ biến rộng, hỗ trợ thiết kế sẵn,
+reposive, tạo cấu trúc linh hoạt....?
+
+các nguyên tắc cần lưu ý khi sử dụng bootstrap
++ class: 
+- 99% phần hiển thị được quy định bởi 
+class
+- các thành phần con: -item (copy ra thêm sẽ tạo thêm đc)
++ grid system:
+-> container > row > col > row > col
+// col thì phải đến row (ko đén col đc) 
+
+//// container-fluid
+
+
+------------------
+transaction: MySQL
+là 1 cơ chế cho phép hủy thao tác khi xảy ra lỗi
+b1
+b2
+b3
+b4 lỗi => dừng lại ở b4, b123 đã xong
+

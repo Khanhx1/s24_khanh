@@ -1,0 +1,46 @@
+.padding-0 {
+    padding: 0px !important;
+}
+.blue-1-text {
+color: rgb(30,131,203) !important;
+font-weight: 500;
+}
+.black-text {
+    color: black !important;
+}
+.text-underline-hover {
+    cursor: pointer;
+}
+
+.text-underline-hover:hover{
+    text-decoration-line: underline;
+}
+.button-text-underline-hover:hover{
+    text-decoration: underline;
+}
+.button-round {
+    background-color: rgb(230,230,230);
+    color: rgb(82,148,200);
+    border: none;
+    padding: 5px;
+    font-size: 15px;
+    height: 80px;
+    width: 80px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+}
+.button-round:active{
+    background-color: rgb(159, 158, 158);
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+.radius-border-video{
+    border-radius: 1%;
+}
+.footer-text{
+    font-size: smaller;
+    line-height: 30px;
+}
+
+
