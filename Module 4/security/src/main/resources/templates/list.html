@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div th:insert="~{common_student::headerStudent}">
+</div>
+
+<a href="/student/create" th:text="#{list.create}"></a>
+<form action="/student" method="get" id="form_i18n">
+    <select name="lang">
+        <option value="en">English</option>
+        <option value="vi">Vietnamese</option>
+        <option value="fr">French</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+<p style="color: green" th:text="${msg}"></p>
+<h1 th:text="#{list.title}"></h1>
+<table width="700px" border="1">
+    <tr>
+        <th>No</th>
+        <th>Code Student</th>
+        <th>Name Student</th>
+        <th>Point Student</th>
+        <th>Gender Student</th>
+        <th>Name Class</th>
+        <th>Detail</th>
+        <th>Add talk</th>
+    </tr>
+    <!--    for(Student student: listStudent)-->
+    <tr th:each="student, loop: ${listStudent.content}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${student.codeStudent}"></td>
+        <td th:text="${student.nameStudent}"></td>
+        <td th:text="${student.point}"></td>
+        <!--        <td th:text="${student.gender}"></td>-->
+        <td>
+            <p th:if="${student.gender == 1}">Male</p>
+            <p th:if="${student.gender == 0}">Female</p>
+            <p th:if="${student.gender == null}">Other</p>
+        </td>
+        <td th:text="${student.classRoom.nameClass}"></td>
+        <td> <a th:href="@{/student/addTalk/{codeStudent}(codeStudent=${student.codeStudent})}">Detail</a></td>
+        <td><a th:href="@{/student/detail/{codeStudent}(codeStudent = ${student.codeStudent})}">Add Talk List</a></td>
+    </tr>
+</table>
+<span>
+    <a th:if="${listStudent.hasPrevious()}" th:href="@{/student(page = ${listStudent.number - 1})}">Trang trước</a>
+     <a th:if="${listStudent.number < listStudent.totalPages - 1}" th:href="@{/student(page = ${listStudent.number + 1})}">Trang sau</a>
+</span>
+
+<span th:each="pageNo: ${#numbers.sequence(0, listStudent.totalPages - 1)}">
+    <a th:href="@{/student(page=${pageNo})}" th:text="${pageNo}"></a>
+
+</span>
+<button onclick="window.location.href='/info?username=???'"></button>
+
+<div th:insert="~{common_student::footerStudent}">
+</div>
+</body>
+</html>

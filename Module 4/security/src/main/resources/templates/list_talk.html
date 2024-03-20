@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div th:insert="~{common_student::headerStudent}">
+</div>
+<table width="700px" border="1">
+    <tr>
+        <th>No</th>
+        <th>Code Student</th>
+        <th>Name Student</th>
+        <th>Point Student</th>
+        <th>Gender Student</th>
+        <th>Name Class</th>
+    </tr>
+    <!--    for(Student student: listStudent)-->
+    <tr th:each="student, loop: ${listStudent}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${student.codeStudent}"></td>
+        <td th:text="${student.nameStudent}"></td>
+        <td th:text="${student.point}"></td>
+        <!--        <td th:text="${student.gender}"></td>-->
+        <td>
+            <p th:if="${student.gender == 1}">Male</p>
+            <p th:if="${student.gender == 0}">Female</p>
+            <p th:if="${student.gender == null}">Other</p>
+        </td>
+        <td th:text="${student.classRoom.nameClass}"></td>
+    </tr>
+</table>
+
+<div th:insert="~{common_student::footerStudent}">
+</div>
+</body>
+</html>
