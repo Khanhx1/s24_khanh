@@ -1,0 +1,42 @@
+.s1k {
+    background-color: transparent !important;
+
+}
+
+
+.k-brand {
+    font-size: 25px !important;
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.k-brand:hover {
+    color: #EE5007 !important;
+}
+
+.s2k {
+    background-color: black !important;
+
+}
+
+
+.fixed-top button{
+    color: #797979;
+    background-color: #585858;
+}
+
+@media screen and (max-width: 992px){
+    .navbar {
+        background-color: black !important;
+    }
+}
+
+.head-tag a {
+    font-size: 18px !important;
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.head-tag a:hover {
+    color: #EE5007 !important;
+}

@@ -1,0 +1,24 @@
+.section-1 {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    height: calc(108vh - 51px);
+    background: linear-gradient(to top, rgba(0, 0, 0, 40%) 75%, #000000 102%, #000000fa 10%), url("https://images.squarespace-cdn.com/content/v1/57f66a16e4fcb5154dc8ba39/1676490289196-33GBW9WEPUW9BLVX4IHU/unsplash-image-ptVBlniJi50.jpg");
+    background-size: cover;
+
+}
+
+.w-color {
+    color: white;
+}
+
+.section-1 .row {
+    padding-top: 148px;
+}
+
+.section-1 .row h1 {
+    scale: 1.5;
+}
+.section-1 .row p {
+    scale: 2;
+}
