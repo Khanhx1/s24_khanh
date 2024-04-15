@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import {Avatar} from "@mui/material";
 
 
 export function Home() {
@@ -17,7 +18,7 @@ export function Home() {
     };
 
 
-    return(
+    return (
         <>
             <div className="section-1">
                 <div className="row">
@@ -80,29 +81,98 @@ export function Home() {
 
             </div>
 
-            <div className="custom-slider-home">
-                <div className="mx-3">
-                <Slider {...settings}>
-                    <div className="d-flex justify-content-center">
-                        <h3>1</h3>
+
+            <div className="container-custom-slider">
+                <div className="custom-slider-home">
+                    <div className="mx-3 custom-slider-home-ins">
+                        <Slider {...settings}>
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                    <div className="d-flex justify-content-center custom-avatar">
+                                        <Avatar alt="Remy Sharp"
+                                                src="https://i.scdn.co/image/ab677762000056b802d0547a179c672721e0ab61"/>
+                                    </div>
+                                    <p>The music industry is constantly evolving, with new technologies and trends
+                                        emerging
+                                        regularly. By staying Music production is a highly creative process that allows
+                                        you
+                                        to express yourself artistically. It provides a sense of fulfillment and
+                                        satisfaction as you see your ideas come to life and impact others
+                                        emotionally.</p>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                    <div className="d-flex justify-content-center custom-avatar">
+                                        <Avatar alt="Remy Sharp"
+                                                src="https://i.scdn.co/image/ab67616100005174371632043a8c12bb7eeeaf9d"/>
+                                    </div>
+                                    <p>The music industry is constantly evolving, with new technologies and trends
+                                        emerging
+                                        regularly. By staying Music production is a highly creative process that allows
+                                        you
+                                        to express yourself artistically. It provides a sense of fulfillment and
+                                        satisfaction as you see your ideas come to life and impact others
+                                        emotionally.</p>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                    <div className="d-flex justify-content-center custom-avatar">
+                                        <Avatar alt="Remy Sharp"
+                                                src="https://i.scdn.co/image/ab6761610000e5eb5328c468cef8019bc41b63a8"/>
+                                    </div>
+                                    <p>The music industry is constantly evolving, with new technologies and trends
+                                        emerging
+                                        regularly. By staying Music production is a highly creative process that allows
+                                        you
+                                        to express yourself artistically. It provides a sense of fulfillment and
+                                        satisfaction as you see your ideas come to life and impact others
+                                        emotionally.</p>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                    <div className="d-flex justify-content-center custom-avatar">
+                                        <Avatar alt="Remy Sharp"
+                                                src="https://i.scdn.co/image/ab6775700000ee859a17b114db2b4d879901ed53"/>
+                                    </div>
+                                    <p>The music industry is constantly evolving, with new technologies and trends
+                                        emerging
+                                        regularly. By staying Music production is a highly creative process that allows
+                                        you
+                                        to express yourself artistically. It provides a sense of fulfillment and
+                                        satisfaction as you see your ideas come to life and impact others
+                                        emotionally.</p>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                    <div className="d-flex justify-content-center custom-avatar">
+                                        <Avatar alt="Remy Sharp"
+                                                src="https://media.socastsrm.com/wordpress/wp-content/blogs.dir/2212/files/2021/08/calvin-harris-1.jpg"/>
+                                    </div>
+                                    <p>The music industry is constantly evolving, with new technologies and trends
+                                        emerging
+                                        regularly. By staying Music production is a highly creative process that allows
+                                        you
+                                        to express yourself artistically. It provides a sense of fulfillment and
+                                        satisfaction as you see your ideas come to life and impact others
+                                        emotionally.</p>
+                                </div>
+                            </div>
+                        </Slider>
                     </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
                 </div>
+            </div>
+
+
+            <div>
+                Khanh
             </div>
 
 
