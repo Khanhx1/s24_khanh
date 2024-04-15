@@ -22,3 +22,99 @@
 .section-1 .row p {
     scale: 2;
 }
+
+.custom-btn-home-s1 {
+    background-color: #EE5007 !important;
+    border-color: #EE5007 !important;
+    color: white !important;
+    border-radius: 35px !important;
+    padding-bottom: 10px !important;
+    scale: 1.05;
+}
+
+.custom-btn-home-s1:hover {
+    background-color: #d24707 !important;
+    border-color: #d24707 !important;
+}
+
+.third-home {
+    height: auto;
+    background: linear-gradient(to top, rgba(0, 0, 0, 65%) -2%, rgb(0 0 0 / 100%) 100%, #000000e0 15%), url("https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+}
+
+.third-home p {
+    color: white;
+}
+.third-card {
+    width: 30%;
+    margin-top: 46px;
+    margin-bottom: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin-left: 79px;
+    font-size: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 140px;
+}
+.third-card-ans {
+    display: flex;
+    float: left;
+    text-align: left;
+    margin-left: 40px;
+    margin-right: 37px;
+    align-items: center;
+    margin-top: 46px;
+    margin-bottom: 46px;
+    width: 70%;
+    font-size: 18px;
+}
+
+.color-card-1 {
+    background-color: #008dcc;
+}
+
+.color-card-2 {
+    background-color: #04b6c4;
+}
+.color-card-3 {
+    background-color: #06ca88;
+}
+.color-card-4 {
+    background-color: #d49600;
+}
+
+.four-home {
+    height: 250px;
+}
+
+.flag-home-fi {
+    height: 40px;
+    background-color: #272727;
+}
+
+.se-home {
+    height: 696px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 58%) -98%, #000 100%), url("https://edge.sitecorecloud.io/avidtech-d6a2e9a9/media/images/resource-center/images/2023-09/how-to-produce-music/mbox-studio-hb_0991.jpg?sc_lang=en");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.se-home p {
+    font-size: 25px;
+    color: #ffffffbd;
+}
+
+.custom-slider-home {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: black !important;
+}
