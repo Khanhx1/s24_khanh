@@ -1,0 +1,135 @@
+.head-course {
+    height: auto;
+    background: linear-gradient(to top, rgba(0, 0, 0, 80%) 75%, #000000 102%, #000000fa 10%);
+}
+
+.cus-head-content {
+    padding-top: 132px;
+}
+
+.k-row {
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.custom-card-course {
+
+}
+
+.cus-title-card {
+    color: white;
+    padding-left: 5px;
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.k-product-course {
+    padding-bottom: 102px;
+}
+
+.custom-img {
+    border-radius: 15px;
+    width: 299px;
+    height: 178px;
+    transition: transform 0.3s ease;
+}
+
+.custom-img:hover {
+    transform: scale(1.1);
+}
+
+.container-img-p {
+    margin-bottom: 15px;
+    overflow: hidden;
+    border-radius: 15px;
+
+    position: relative;
+}
+
+
+.custom-price-p {
+    color: white;
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+
+/*hover card*/
+
+.overlay-card {
+    position: absolute; /* Vị trí tuyệt đối để lớp màu đen nhẹ chồng lên ảnh */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Màu đen nhẹ trong suốt */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển động */
+    pointer-events: none; /* Đảm bảo sự kiện không ánh xạ xuống lớp màu */
+}
+
+.container-img-p:hover .overlay-card {
+    background-color: rgba(0, 0, 0, 0.4); /* Khi hover, màu đen nhẹ sẽ trở nên rõ hơn */
+}
+
+/*price*/
+
+.custom-price-p span {
+    background-color: #f25706;
+    border-radius: 4px;
+    padding: 0px 8px 3px 5px;
+}
+
+.filter-p {
+    margin-bottom: 35px;
+    margin-left: 34px;
+}
+
+.custom-text-search {
+    background: none;
+    border: 2px solid white;
+    border-radius: 7px;
+    height: 38px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.custom-text-search:focus {
+    outline: none;
+}
+
+.custom-btn-search-light {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 7px;
+    color: white;
+    height: 38px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn-search-light:hover {
+    background-color: white;
+    color: black;
+}
+
+.custom-select-search {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 7px;
+    color: white;
+    height: 38px;
+    margin-left: 10px;
+    padding: 0 5px;
+}
+
+.custom-select-search:focus {
+    outline: none;
+}
+
+.custom-select-search option {
+    background-color: black;
+}
