@@ -5,7 +5,8 @@ import {Header} from "./components/header/Header";
 import {Footer} from "./components/footer/Footer";
 import {Home} from "./components/home/Home";
 import "bootstrap/dist/css/bootstrap.css";
-import {Course} from "./components/Course/Course";
+import {Course} from "./components/course/Course";
+import {Detail} from "./components/detail/Detail";
 function App() {
   return (
    <>
@@ -14,6 +15,7 @@ function App() {
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
+         <Route path={"/course/:id"} element={<Detail/>}></Route>
      </Routes>
        <Footer/>
    </BrowserRouter>

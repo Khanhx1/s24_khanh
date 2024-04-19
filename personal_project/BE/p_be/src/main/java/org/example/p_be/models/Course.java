@@ -13,6 +13,11 @@ public class Course {
     private String img;
     private String audio;
 
+    private Integer price;
+    @Column(columnDefinition = "bit(1) default 0")
+    private Boolean isDelete;
+    @Column(columnDefinition = "text")
+    private String description;
     @ManyToOne
     @JoinColumn(name = "id_category")
     private Category category;
@@ -20,12 +25,15 @@ public class Course {
     public Course() {
     }
 
-    public Course(Integer id, String name, String instructor, String img, String audio, Category category) {
+    public Course(Integer id, String name, String instructor, String img, String audio, Integer price, Boolean isDelete, String description, Category category) {
         this.id = id;
         this.name = name;
         Instructor = instructor;
         this.img = img;
         this.audio = audio;
+        this.price = price;
+        this.isDelete = isDelete;
+        this.description = description;
         this.category = category;
     }
 
@@ -67,6 +75,30 @@ public class Course {
 
     public void setAudio(String audio) {
         this.audio = audio;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Category getCategory() {

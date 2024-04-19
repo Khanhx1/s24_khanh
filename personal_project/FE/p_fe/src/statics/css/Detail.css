@@ -1,0 +1,62 @@
+.bg-content-detail {
+    filter: blur(12px) brightness(60%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 720px;
+    position: absolute;
+    width: 100%;
+}
+.container-course-detail {
+    position: relative;
+}
+.content-detail {
+    position: relative;
+    top: 185px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 98vw;
+}
+.custom-img-detail {
+    width: 389px;
+    height: 232px;
+    border-radius: 15px;
+    filter: brightness(110%);
+}
+
+.content-detail-1 {
+    max-width: 98vw;
+    display: flex;
+    width: 68%;
+}
+.description-content-detail {
+    word-wrap: break-word;
+}
+.custom-category-detail {
+    background-color: #8a4caf;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 1px 9px 4px;
+}
+.custom-price-detail {
+    display: inline-block;
+    background-color: #f25706;
+    border-radius: 4px;
+    padding: 3px 8px 5px 6px;
+}
+.custom-add-to-cart {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 8px 30px 10px 30px;
+    font-size: 18px;
+    border-radius: 40px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.custom-add-to-cart:hover {
+    border-color: #f25706;
+    color: #f25706;
+}
+
