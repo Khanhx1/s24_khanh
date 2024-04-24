@@ -27,6 +27,7 @@ public class CourseController {
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> getCourse(@PathVariable("id")Integer id) {
+        String a = "";
         Course course = iCourseService.findById(id);
         return new ResponseEntity<>(course, HttpStatus.OK);
     }
