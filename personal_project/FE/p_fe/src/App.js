@@ -7,11 +7,23 @@ import {Home} from "./components/home/Home";
 import "bootstrap/dist/css/bootstrap.css";
 import {Course} from "./components/course/Course";
 import {Detail} from "./components/detail/Detail";
+import "../src/statics/css/CommonStyle.css"
+import {Login} from "./components/login/Login";
+import {useState} from "react";
 function App() {
+    const [isShowLogin, setIsShowLogin] = useState(false);
+
+    const closeModalLogin = () => {
+        setIsShowLogin(false);
+    }
+
+    const openModalLogin = () => {
+        setIsShowLogin(true);
+    }
   return (
    <>
    <BrowserRouter>
-       <Header/>
+       <Header openModalLogin={openModalLogin}/>
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
@@ -19,6 +31,7 @@ function App() {
      </Routes>
        <Footer/>
    </BrowserRouter>
+       {isShowLogin && (<Login closeModalLogin={closeModalLogin}/>)}
    </>
   );
 }

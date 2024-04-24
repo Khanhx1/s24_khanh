@@ -1,0 +1,80 @@
+.modal-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+}
+
+.modal-login-content {
+    background-color: white;
+    height: 500px;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+}
+
+.login-input-container {
+    margin: 90px 70px 20px 70px;
+}
+
+.custom-login-input-cover {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-login-input {
+    border: 2px solid #1f1f1f;
+    border-radius: 3px;
+    width: 100%;
+    padding: 8px 15px 9px 16px;
+}
+
+.custom-login-input:focus {
+    outline: none;
+}
+
+.custom-brand-login {
+    margin-top: 82px;
+    color: #f3671e;
+}
+
+.background-login {
+
+    height: 100%;
+    width: 100%;
+
+}
+
+.custom-btn-login-container {
+    padding: 10px 70px 0px 70px;
+}
+
+.custom-btn-login {
+    border: none;
+    background-color: #f3671e;
+    color: white;
+    width: 100%;
+    padding: 12px 0px;
+    border-radius: 5px;
+}
+
+.custom-small-login-m {
+    margin: 10px 70px 0px 70px;
+}
+
+.custom-small-login-m p {
+    font-size: 13px;
+}
+
+.custom-small-login-m span {
+    font-weight: bold;
+    color: #f3671e;
+}

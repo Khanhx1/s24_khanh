@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import "../../statics/css/Header.css"
 
-export function Header() {
+export function Header({openModalLogin}) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -31,6 +31,7 @@ export function Header() {
                             <Nav.Link href="#">Guide</Nav.Link>
                             <Nav.Link href="#">About us</Nav.Link>
                             <Nav.Link href="#">Contact</Nav.Link>
+                            <p onClick={()=>{openModalLogin()}}>Login</p>
                             {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
                             {/*    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
                             {/*    <NavDropdown.Item href="#action/3.2">*/}

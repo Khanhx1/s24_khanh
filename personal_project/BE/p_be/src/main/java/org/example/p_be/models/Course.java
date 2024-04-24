@@ -18,6 +18,15 @@ public class Course {
     private Boolean isDelete;
     @Column(columnDefinition = "text")
     private String description;
+
+    @Column(columnDefinition = "text")
+    private String extraDescription;
+
+    @Column(columnDefinition = "text")
+    private String titleChapter;
+
+    @Column(columnDefinition = "text")
+    private String targetLesson;
     @ManyToOne
     @JoinColumn(name = "id_category")
     private Category category;
@@ -25,7 +34,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(Integer id, String name, String instructor, String img, String audio, Integer price, Boolean isDelete, String description, Category category) {
+    public Course(Integer id, String name, String instructor, String img, String audio, Integer price, Boolean isDelete, String description, String extraDescription, String titleChapter, String targetLesson, Category category) {
         this.id = id;
         this.name = name;
         Instructor = instructor;
@@ -34,6 +43,9 @@ public class Course {
         this.price = price;
         this.isDelete = isDelete;
         this.description = description;
+        this.extraDescription = extraDescription;
+        this.titleChapter = titleChapter;
+        this.targetLesson = targetLesson;
         this.category = category;
     }
 
@@ -99,6 +111,30 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getExtraDescription() {
+        return extraDescription;
+    }
+
+    public void setExtraDescription(String extraDescription) {
+        this.extraDescription = extraDescription;
+    }
+
+    public String getTitleChapter() {
+        return titleChapter;
+    }
+
+    public void setTitleChapter(String titleChapter) {
+        this.titleChapter = titleChapter;
+    }
+
+    public String getTargetLesson() {
+        return targetLesson;
+    }
+
+    public void setTargetLesson(String targetLesson) {
+        this.targetLesson = targetLesson;
     }
 
     public Category getCategory() {

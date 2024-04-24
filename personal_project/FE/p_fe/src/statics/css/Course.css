@@ -1,6 +1,6 @@
 .head-course {
     height: auto;
-    background: linear-gradient(to top, rgba(0, 0, 0, 80%) 75%, #000000 102%, #000000fa 10%);
+    background: linear-gradient(to top, #282828 75%, #000000 102%, #000000fa 10%);
 }
 
 .cus-head-content {
@@ -132,4 +132,21 @@
 
 .custom-select-search option {
     background-color: black;
+}
+@media screen and (max-width: 1400px) {
+    .custom-img {
+        height: 148px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+   .custom-img {
+       height: 120px;
+   }
+}
+
+@media screen and (max-width: 768px) {
+    .custom-img {
+        height: 174px;
+    }
 }
