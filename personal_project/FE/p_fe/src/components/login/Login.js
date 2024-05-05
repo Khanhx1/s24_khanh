@@ -1,12 +1,14 @@
 import "../../statics/css/Login.css"
 import {useEffect, useState} from "react";
 import {Helmet} from "react-helmet";
-
-export function Login({closeModalLogin}) {
+import * as LoginService from "../../services/LoginService"
+import {toast} from "react-toastify";
+export function Login({closeModalLogin, changeFlagApp}) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChangeUsername = (e) => {
         setUsername(e.target.value);
@@ -14,6 +16,25 @@ export function Login({closeModalLogin}) {
 
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
+    }
+
+    const handleLogin = async () => {
+        try {
+            const user = {username: username, password: password}
+            const res = await LoginService.login(user);
+
+            if (res) {
+                localStorage.setItem("token", res.token);
+                toast.success("Login successfully");
+                changeFlagApp();
+                closeModalLogin();
+
+            } else {
+                setErrorMessage("Username or password is wrong");
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     useEffect(() => {
@@ -68,8 +89,11 @@ export function Login({closeModalLogin}) {
                             </div>
 
                         </div>
+                        <div>
+                            <p>{errorMessage}</p>
+                        </div>
                         <div className="d-flex justify-content-center align-items-center custom-btn-login-container">
-                            <button className="custom-btn-login">Login</button>
+                            <button className="custom-btn-login" onClick={()=>{handleLogin()}}>Login</button>
                         </div>
                         <div className="d-flex justify-content-center align-items-center custom-small-login-m">
                             <p>Don't have an account yet? <span>Sign up</span></p>

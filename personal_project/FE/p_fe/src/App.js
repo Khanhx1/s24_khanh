@@ -9,11 +9,38 @@ import {Course} from "./components/course/Course";
 import {Detail} from "./components/detail/Detail";
 import "../src/statics/css/CommonStyle.css"
 import {Login} from "./components/login/Login";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Cart} from "./components/cart/Cart";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css"
+import * as LoginService from "./services/LoginService"
 function App() {
     const [isShowLogin, setIsShowLogin] = useState(false);
+    const [userLogin, setUserLogin] = useState("");
+    const [flagApp, setFlagApp] = useState(false);
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token !== undefined) {
+            loadUserLogin();
+        }
+    }, [flagApp]);
+
+    const changeFlagApp = () => {
+        setFlagApp(!flagApp);
+    }
+
+    const loadUserLogin = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const res = await LoginService.getInfo(token);
+            if (res) {
+                setUserLogin(res);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
     const closeModalLogin = () => {
         setIsShowLogin(false);
     }
@@ -23,8 +50,9 @@ function App() {
     }
   return (
    <>
+       <ToastContainer/>
    <BrowserRouter>
-       <Header openModalLogin={openModalLogin}/>
+       <Header openModalLogin={openModalLogin} userLogin={userLogin}/>
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
@@ -33,7 +61,7 @@ function App() {
      </Routes>
        <Footer/>
    </BrowserRouter>
-       {isShowLogin && (<Login closeModalLogin={closeModalLogin}/>)}
+       {isShowLogin && (<Login closeModalLogin={closeModalLogin} changeFlagApp={changeFlagApp}/>)}
    </>
   );
 }

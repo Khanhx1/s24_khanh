@@ -40,3 +40,33 @@
 .head-tag a:hover {
     color: #EE5007 !important;
 }
+.login-btn-head {
+    color: white;
+    margin-bottom: 0px;
+    font-size: 17px;
+    background-color: #EE5007;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    position: relative;
+    min-width: 71px;
+}
+.ct-dropdown-login {
+    background-color: white;
+    position: absolute;
+    min-width: 180px;
+    top: 48px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.ct-dropdown-login p {
+    padding: 10px 10px;
+    margin-bottom: 0px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.ct-dropdown-login p:hover {
+    background-color: #d5d4d4;
+}

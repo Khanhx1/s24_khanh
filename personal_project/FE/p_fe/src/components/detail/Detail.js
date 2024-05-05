@@ -4,6 +4,7 @@ import * as CourseService from "../../services/CourseService";
 import {useEffect, useRef, useState} from "react";
 import {Helmet} from "react-helmet";
 import lockVideo from "../../statics/assets/detail_course/bg-video-lock.png"
+import {toast} from "react-toastify";
 export function Detail() {
 
     const [course, setCourse] = useState();
@@ -18,6 +19,18 @@ export function Detail() {
     useEffect(() => {
         getCourse();
     }, []);
+
+    const handleAddToCart = async () => {
+        try {
+            let id = course.id;
+            const res = await CourseService.addToCart(id);
+            if (res) {
+                toast.success("Course added to cart");
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const getCourse = async () => {
         try {
@@ -90,7 +103,7 @@ export function Detail() {
                                 <p className="custom-price-detail">${course.price}</p>
                             </div>
                             <div ref={videoSectionRef}>
-                                <button className="custom-add-to-cart">Add to cart</button>
+                                <button className="custom-add-to-cart" onClick={()=>{handleAddToCart()}}>Add to cart</button>
                             </div>
 
                         </div>
