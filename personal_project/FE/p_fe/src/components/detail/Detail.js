@@ -1,14 +1,19 @@
 import "../../statics/css/Detail.css"
 import {useParams} from "react-router-dom";
 import * as CourseService from "../../services/CourseService";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Helmet} from "react-helmet";
-
+import lockVideo from "../../statics/assets/detail_course/bg-video-lock.png"
 export function Detail() {
 
     const [course, setCourse] = useState();
     const [chapters, setChapters] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [currentChapter, setCurrentChapter] = useState("");
+    const [isLockCourse, setIsLockCourse] = useState(false);
     const {id} = useParams();
+    const videoSectionRef = useRef(null);
+
 
     useEffect(() => {
         getCourse();
@@ -20,11 +25,32 @@ export function Detail() {
             setCourse(res);
             let chapters = res.titleChapter.split(";");
             setChapters(chapters);
+            setCurrentChapter(chapters[0]);
+            let categories = res.categories.split(",");
+            setCategories(categories);
 
         } catch (e) {
             console.log(e);
         }
     }
+
+    const handleChangeChapter = (index) => {
+        setCurrentChapter(chapters[index]);
+        scrollToVideoSection();
+        if (index == 0) {
+            setIsLockCourse(false);
+        } else {
+            setIsLockCourse(true);
+        }
+    }
+
+    const scrollToVideoSection = () => {
+        if (videoSectionRef.current) {
+            videoSectionRef.current.scrollIntoView({behavior: 'smooth'});
+        }
+    };
+
+
     if (!course) {
         return (<div>Loading</div>)
     }
@@ -46,18 +72,24 @@ export function Detail() {
                             <p className="description-content-detail">{course.description}</p>
 
                             <div>
-                                <p>Instructor: {course.instructor}</p>
+                                <p className="custom-title-category">Instructor: {course.instructor}</p>
                             </div>
 
-                            <div className="mb-2">
+                            <div className="d-flex">
                                 <p className="custom-title-category">Tags:</p>
-                                <p className="custom-category-detail">{course.category.name}</p>
+                                <div>
+                                    {
+                                        categories.map((item, index) => (
+                                            <p className="custom-category-detail" key={index}>{item}</p>
+                                        ))
+                                    }
+                                </div>
                             </div>
                             <div className="mb-2">
                                 <p className="custom-title-price">Price:</p>
                                 <p className="custom-price-detail">${course.price}</p>
                             </div>
-                            <div>
+                            <div ref={videoSectionRef}>
                                 <button className="custom-add-to-cart">Add to cart</button>
                             </div>
 
@@ -73,15 +105,55 @@ export function Detail() {
 
                 <div className="se-detail">
                     <div className="se-detail-container col-7">
+                        <div className="d-flex justify-content-center align-items-center col-12 mb-3">
+                            <h3 className="w-color-1 w-wrap cus-title-video-detail">
+                                {currentChapter}
+                            </h3>
+                        </div>
+                        <div className="d-flex justify-content-center align-items-center mb-5">
+                            {
+                                isLockCourse ? (
+                                    <div className="d-flex justify-content-center align-items-center position-relative ct-lock-video">
+                                        <img
+                                            src={lockVideo}
+                                            className="cus-lock-video-detail position-relative"
+                                        />
+                                        <div className="position-absolute ct-content-lock-d">
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <span className="material-symbols-outlined w-color-1 c-l-i">lock</span>
+                                            </div>
+                                            <p className="title-lock-video-de">Please buy this course to unlock all
+                                                lessons</p>
+                                            <div className="d-flex justify-content-center align-items-center mt-3">
+                                                <button className="unlock-btn">Unlock now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <video className="custom-video-detail" controls>
+                                        <source src={course.videoDemo} type="video/mp4"/>
+                                        Your browser does not support the video tag.
+                                    </video>
+                                )
+                            }
+
+
+                        </div>
                         <h4 className="d-flex justify-content-center">Lessons in this course</h4>
                         <h5>{chapters.length} lessons</h5>
                         {
                             course.titleChapter && (
                                 chapters.map((item, index) => (
-                                    <div className="d-flex block-title-chapter" key={index}>
+                                    <div className="d-flex block-title-chapter" key={index} onClick={() => {
+                                        handleChangeChapter(index)
+                                    }}>
                                         <p className="col-10">{index + 1 + ". " + item}</p>
-                                        <div className="d-flex justify-content-end align-items-center px-2 custom-lock-detail col-2">
-                                            <span className="material-symbols-outlined">lock</span>
+                                        <div
+                                            className="d-flex justify-content-end align-items-center px-2 custom-lock-detail col-2">
+                                            {index == 0 ? (<></>): (
+                                                <span className="material-symbols-outlined">lock</span>
+                                            )
+                                            }
                                         </div>
                                     </div>
                                 ))

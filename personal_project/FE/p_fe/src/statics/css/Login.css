@@ -9,7 +9,10 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1400;
+
+
 }
+
 
 .modal-login-content {
     background-color: white;
@@ -17,6 +20,7 @@
     border-radius: 5px;
     display: flex;
     overflow: hidden;
+
 }
 
 .login-input-container {
@@ -28,33 +32,89 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    color: rgba(0, 0, 0, 0.73);
 }
 
-.custom-login-input {
-    border: 2px solid #1f1f1f;
-    border-radius: 3px;
+.custom-login-input-1 {
+    border: 2px solid rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
     width: 100%;
-    padding: 8px 15px 9px 16px;
+    padding: 21px 15px 5px 15px;
+    font-size: 14px;
+    background: transparent;
+    z-index: 3;
+}
+.custom-login-input-1:focus {
+    outline: none;
+    border-color: #f3671e;
+}
+.custom-login-input-2 {
+    border: 2px solid rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    width: 100%;
+    padding: 21px 15px 5px 15px;
+    font-size: 14px;
+    background: transparent;
+    z-index: 3;
+}
+.custom-login-input-2:focus {
+    outline: none;
+    border-color: #f3671e;
+}
+.custom-label-login-username {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    transition: font-size 0.2s ease, top 0.2s ease, color 0.2s ease;
+    z-index: 2;
 }
 
-.custom-login-input:focus {
-    outline: none;
+.custom-login-input-1:focus + .custom-label-login-username {
+    color: #f3671e;
+    top: 6px;
+    font-size: 12px;
 }
+
+.input-has-content-user {
+    top: 6px;
+    font-size: 12px;
+}
+
+.custom-label-login-password {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    transition: font-size 0.2s ease, top 0.2s ease, color 0.2s ease;
+    z-index: 2;
+}
+.custom-login-input-2:focus + .custom-label-login-password {
+    color: #f3671e;
+    top: 6px;
+    font-size: 12px;
+}
+.input-has-content-pass {
+    top: 6px;
+    font-size: 12px;
+}
+
 
 .custom-brand-login {
-    margin-top: 82px;
+    margin-top: 40px;
     color: #f3671e;
 }
 
 .background-login {
-
+    background: url("https://images.unsplash.com/photo-1483354483454-4cd359948304?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
     height: 100%;
     width: 100%;
+    position: absolute;
 
 }
 
 .custom-btn-login-container {
-    padding: 10px 70px 0px 70px;
+    padding: 30px 70px 0px 70px;
 }
 
 .custom-btn-login {
@@ -62,7 +122,7 @@
     background-color: #f3671e;
     color: white;
     width: 100%;
-    padding: 12px 0px;
+    padding: 13px 0px;
     border-radius: 5px;
 }
 
@@ -77,4 +137,37 @@
 .custom-small-login-m span {
     font-weight: bold;
     color: #f3671e;
+}
+.custom-close-btn-login {
+    margin-top: 11px;
+    margin-right: 11px;
+}
+.custom-close-btn-login span {
+    scale: 1.1;
+    cursor: pointer;
+}
+.custom-t-1 {
+    font-family: "GT Walsheim Pro", Arial, sans-serif;
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    padding: 6px 5px 5px 5px;
+    background-color: #fc7b39;
+    border: 1px solid #fc7b39;
+    border-radius: 5px;
+}
+.custom-br-login {
+    width: 50%;
+    height: 15px;
+    border: 2px solid #fc7b39;
+    border-radius: 30px;
+    background-color: #fc7b39;
+}
+
+.custom-t-2 {
+    font-family: "GT Walsheim Pro", Arial, sans-serif;
+    color: white;
+    font-size: 18px;
+    padding-top: 15px;
+    font-weight: bolder;
 }

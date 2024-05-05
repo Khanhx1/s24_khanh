@@ -10,6 +10,7 @@ import {Detail} from "./components/detail/Detail";
 import "../src/statics/css/CommonStyle.css"
 import {Login} from "./components/login/Login";
 import {useState} from "react";
+import {Cart} from "./components/cart/Cart";
 function App() {
     const [isShowLogin, setIsShowLogin] = useState(false);
 
@@ -28,6 +29,7 @@ function App() {
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
          <Route path={"/course/:id"} element={<Detail/>}></Route>
+         <Route path={"/cart"} element={<Cart/>}></Route>
      </Routes>
        <Footer/>
    </BrowserRouter>

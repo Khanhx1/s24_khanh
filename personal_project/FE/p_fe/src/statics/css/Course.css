@@ -1,10 +1,14 @@
+
+
 .head-course {
     height: auto;
-    background: linear-gradient(to top, #282828 75%, #000000 102%, #000000fa 10%);
+    background-color: #282828;
 }
 
 .cus-head-content {
-    padding-top: 132px;
+    padding-top: 79px;
+
+    flex-wrap: wrap;
 }
 
 .k-row {
@@ -17,13 +21,16 @@
 }
 
 .cus-title-card {
-    color: white;
+    color: #ffffffbd;
     padding-left: 5px;
     text-decoration: none;
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .k-product-course {
@@ -32,8 +39,10 @@
 
 .custom-img {
     border-radius: 15px;
-    width: 299px;
-    height: 178px;
+    width: 100%;
+    height: 200px;
+    /*width: 299px;*/
+    /*height: 178px;*/
     transition: transform 0.3s ease;
 }
 
@@ -42,7 +51,7 @@
 }
 
 .container-img-p {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     overflow: hidden;
     border-radius: 15px;
 
@@ -77,9 +86,11 @@
 /*price*/
 
 .custom-price-p span {
-    background-color: #f25706;
+    /*background-color: #f25706;*/
     border-radius: 4px;
-    padding: 0px 8px 3px 5px;
+    padding: 0px 8px 3px 0px;
+    font-size: 18px;
+    color: #ffffff7d;
 }
 
 .filter-p {
@@ -88,13 +99,16 @@
 }
 
 .custom-text-search {
-    background: none;
-    border: 2px solid white;
-    border-radius: 7px;
+    background: #ffffff29;
+    border: none;
+    border-radius: 5px;
     height: 38px;
     color: white;
     padding-left: 10px;
     padding-right: 10px;
+}
+input.custom-text-search::placeholder {
+    color: #a2a2a2;
 }
 
 .custom-text-search:focus {
@@ -103,24 +117,25 @@
 
 .custom-btn-search-light {
     background-color: transparent;
-    border: 2px solid white;
-    border-radius: 7px;
-    color: white;
+    border: 1px solid #a2a2a2;
+    border-radius: 5px;
+    color: #a2a2a2;
     height: 38px;
     margin-left: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .custom-btn-search-light:hover {
-    background-color: white;
+    background-color: #cccbcb;
+    border-color: #cccbcb;
     color: black;
 }
 
 .custom-select-search {
     background-color: transparent;
-    border: 2px solid white;
-    border-radius: 7px;
-    color: white;
+    border: 1px solid #a2a2a2;
+    border-radius: 5px;
+    color: #a2a2a2;
     height: 38px;
     margin-left: 10px;
     padding: 0 5px;
@@ -149,4 +164,98 @@
     .custom-img {
         height: 174px;
     }
+}
+.side-bar {
+    padding: 40px 15px 20px 20px;
+    min-height: 200px;
+    background-color: #282828;
+
+}
+.primary-content-course {
+    padding: 40px 0px 0px 0px;
+    background-color: #282828;
+}
+
+.w-color-1 {
+    color: white;
+}
+.w-color-2 {
+    color: #ffffffbd;
+}
+.w-color-3 {
+    color: #ffffff7d;
+}
+.title-filter-course {
+    border-bottom: 2px solid #ffffffbd;
+}
+.w-filter-c {
+    cursor: pointer;
+}
+.cus-ban-1 {
+    background: #6c6b6b;
+    height: 200px;
+    border-radius: 5px;
+
+}
+.c-b-1 {
+    background-color: #282828;
+    flex-wrap: wrap;
+}
+@media screen and (max-width: 992px){
+    .c-b-1 {
+        padding: 0px 20px;
+    }
+
+}
+.container-filter-2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+.container-filter-2 span {
+    color: #a2a2a2;
+}
+.block-filter {
+    padding: 0px 10px;
+    flex-wrap: wrap;
+}
+
+.page-item a {
+    color: #9f9f9f;
+    background-color: #ffffff29;
+    border: none;
+}
+.page-item a:hover {
+    color: white;
+    background-color: #7a7a7a;
+    border-color: #7a7a7a;
+}
+.page-link.disabled, .disabled > .page-link {
+    color: #4b4b4b;
+    background-color: rgb(56, 56, 56);
+    border-color: rgb(56, 56, 56);
+}
+.page-link.active, .active > .page-link {
+    background-color: #7a7a7a;
+    border-color: #7a7a7a;
+
+}
+.page-item .active {
+
+}
+.pagination li {
+    padding-right: 1px;
+}
+.pagination {
+    --bs-pagination-focus-box-shadow: none
+}
+.cus-t-user {
+    padding-left: 5px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.3);
+}
+.c-user-i {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 15px !important;
+    padding-left: 3px;
 }

@@ -9,7 +9,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String Instructor;
+    private String instructor;
     private String img;
     private String audio;
 
@@ -27,17 +27,22 @@ public class Course {
 
     @Column(columnDefinition = "text")
     private String targetLesson;
-    @ManyToOne
-    @JoinColumn(name = "id_category")
-    private Category category;
+
+    @Column(columnDefinition = "text")
+    private String videoDemo;
+
+    private Integer totalUser;
+
+    @Column(columnDefinition = "text")
+    private String categories;
 
     public Course() {
     }
 
-    public Course(Integer id, String name, String instructor, String img, String audio, Integer price, Boolean isDelete, String description, String extraDescription, String titleChapter, String targetLesson, Category category) {
+    public Course(Integer id, String name, String instructor, String img, String audio, Integer price, Boolean isDelete, String description, String extraDescription, String titleChapter, String targetLesson, String videoDemo, Integer totalUser, String categories) {
         this.id = id;
         this.name = name;
-        Instructor = instructor;
+        this.instructor = instructor;
         this.img = img;
         this.audio = audio;
         this.price = price;
@@ -46,7 +51,9 @@ public class Course {
         this.extraDescription = extraDescription;
         this.titleChapter = titleChapter;
         this.targetLesson = targetLesson;
-        this.category = category;
+        this.videoDemo = videoDemo;
+        this.totalUser = totalUser;
+        this.categories = categories;
     }
 
     public Integer getId() {
@@ -66,11 +73,11 @@ public class Course {
     }
 
     public String getInstructor() {
-        return Instructor;
+        return instructor;
     }
 
     public void setInstructor(String instructor) {
-        Instructor = instructor;
+        this.instructor = instructor;
     }
 
     public String getImg() {
@@ -137,11 +144,27 @@ public class Course {
         this.targetLesson = targetLesson;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getVideoDemo() {
+        return videoDemo;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setVideoDemo(String videoDemo) {
+        this.videoDemo = videoDemo;
+    }
+
+    public Integer getTotalUser() {
+        return totalUser;
+    }
+
+    public void setTotalUser(Integer totalUser) {
+        this.totalUser = totalUser;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 }

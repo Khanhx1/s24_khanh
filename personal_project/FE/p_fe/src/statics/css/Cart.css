@@ -1,0 +1,47 @@
+.head-cart {
+    height: 200px;
+    background-color: black;
+}
+.container-cart {
+    background: url("https://w.wallhaven.cc/full/9d/wallhaven-9dyvok.jpg");
+}
+.content-cart {
+    height: 500px;
+    background-color: #171717;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #171717;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.ct-content-cart {
+    padding-top: 150px;
+}
+.title-cart {
+    font-size: 25px;
+}
+.title-total-cart {
+    font-size: 25px;
+}
+.payment-content {
+    background-color: #282828;
+    border: 1px solid #5e5e5e;
+    border-radius: 10px;
+    height: 300px;
+
+}
+.item-cart {
+    background-color: #282828;
+
+    border-radius: 10px;
+    height: 150px;
+    display: flex;
+    overflow: hidden;
+}
+.img-cart-item {
+    height: 150px;
+    width: 266px;
+}
+.p-content-cart {
+
+}
