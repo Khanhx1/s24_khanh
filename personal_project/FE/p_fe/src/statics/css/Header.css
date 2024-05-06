@@ -70,3 +70,24 @@
 .ct-dropdown-login p:hover {
     background-color: #d5d4d4;
 }
+
+.icon-cart-head {
+    color: white;
+    font-size: 30px !important;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.icon-cart-head:hover {
+    color: #EE5007;
+}
+.circle-cart-quan {
+    background-color: #EE5007;
+    border-radius: 50px;
+    overflow: hidden;
+    padding: 1px 10px;
+    scale: 0.7;
+}
+.circle-cart-quan p {
+    margin-bottom: 0px;
+    color: white;
+}

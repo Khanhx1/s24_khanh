@@ -32,7 +32,7 @@ public class CartController {
     private JwtService jwtService;
 
     @GetMapping("/save")
-    public ResponseEntity<?> saveToCart (@RequestParam("id")Integer id, @RequestHeader("Authorization")String token) {
+    public ResponseEntity<?> saveToCart(@RequestParam("id") Integer id, @RequestHeader("Authorization") String token) {
         String newToken = token.substring(7);
         String username = jwtService.getUsernameFromJwtToken(newToken);
         User user = iUserService.findUserByUsername(username);
@@ -42,18 +42,41 @@ public class CartController {
         orderCourse.setCourse(course);
         orderCourse.setCustomer(customer);
         orderCourse.setDelete(false);
-        iCartService.saveCart(orderCourse);
-        return new ResponseEntity<>("successfull", HttpStatus.OK);
+
+        Boolean statusSave = true;
+        List<OrderCourse> orderCourseList = iCartService.getAll();
+        for (OrderCourse orderCourse1 : orderCourseList) {
+            if (orderCourse1.getCourse().getId().equals(id) && customer.getId().equals(orderCourse1.getCustomer().getId())) {
+                statusSave = false;
+                break;
+            }
+        }
+
+        if (statusSave) {
+            iCartService.saveCart(orderCourse);
+            return new ResponseEntity<>("successfull", HttpStatus.OK);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getAllCart(@RequestHeader("Authorization")String token) {
+    public ResponseEntity<?> getAllCart(@RequestHeader("Authorization") String token) {
         String newToken = token.substring(7);
         String username = jwtService.getUsernameFromJwtToken(newToken);
         User user = iUserService.findUserByUsername(username);
-        Integer id = user.getId();
-        List<Course> orderCourses = iCourseService.findAllCartById(id);
+        Integer id = user.getCustomer().getId();
+        List<Course> orderCourses = iCourseService.findAllCartByIdCustomer(id);
         return new ResponseEntity<>(orderCourses, HttpStatus.OK);
+    }
+
+    @GetMapping("/deleteByIdCourse")
+    public ResponseEntity<?> deleteCartById(@RequestParam("id") Integer idCourse, @RequestHeader("Authorization") String token) {
+        String newToken = token.substring(7);
+        String username = jwtService.getUsernameFromJwtToken(newToken);
+        User user = iUserService.findUserByUsername(username);
+        Integer idCustomer = user.getCustomer().getId();
+        iCartService.deleteByCustomerAndCourse(idCourse, idCustomer);
+        return ResponseEntity.ok("delete cart successfully");
     }
 
 }

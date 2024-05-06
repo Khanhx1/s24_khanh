@@ -80,5 +80,5 @@ public interface ICourseRepository extends JpaRepository<Course, Integer> {
             "join order_course on order_course.id_course = course.id\n" +
             "where order_course.id_receipt is null and order_course.id_customer = :id \n" +
             "GROUP BY course.id", nativeQuery = true)
-    List<Course> findAllCartById(@Param("id") Integer id);
+    List<Course> findAllCartByIdCustomer(@Param("id") Integer id);
 }

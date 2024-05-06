@@ -2,7 +2,7 @@ import "../../statics/css/Login.css"
 import {useEffect, useState} from "react";
 import {Helmet} from "react-helmet";
 import * as LoginService from "../../services/LoginService"
-import {toast} from "react-toastify";
+import {Bounce, toast} from "react-toastify";
 export function Login({closeModalLogin, changeFlagApp}) {
 
     const [username, setUsername] = useState('');
@@ -25,7 +25,17 @@ export function Login({closeModalLogin, changeFlagApp}) {
 
             if (res) {
                 localStorage.setItem("token", res.token);
-                toast.success("Login successfully");
+                toast.success('Login successfully', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
                 changeFlagApp();
                 closeModalLogin();
 

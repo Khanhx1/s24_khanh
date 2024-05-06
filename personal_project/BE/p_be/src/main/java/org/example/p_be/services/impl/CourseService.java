@@ -52,7 +52,7 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<Course> findAllCartById(Integer id) {
-        return iCourseRepository.findAllCartById(id);
+    public List<Course> findAllCartByIdCustomer(Integer id) {
+        return iCourseRepository.findAllCartByIdCustomer(id);
     }
 }

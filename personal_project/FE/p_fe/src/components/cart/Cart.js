@@ -10,6 +10,7 @@ export function Cart() {
     const [totalCourse, setTotalCourse] = useState(0);
     const [isEmpty, setIsEmpty] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
+
     useEffect(() => {
         getCart();
     }, []);
@@ -91,7 +92,7 @@ export function Cart() {
 
                                                                 </div>
                                                                 <div className="col-3 d-flex justify-content-end">
-                                                                    <p className="w-color-2 p-content-cart mb-2">Price: <span>{item.price}$</span>
+                                                                    <p className="w-color-2 p-content-cart mb-2">Price: <span>${item.price}</span>
                                                                     </p>
                                                                 </div>
 
@@ -122,11 +123,11 @@ export function Cart() {
                                         <div className="ins-payment-content col-12 px-5 pt-4">
                                             <div className="col-12 d-flex">
                                                 <span className="w-color-2 col-6">Order Summary</span>
-                                                <span className="w-color-2 col-6 d-flex justify-content-end">{totalPrice}$</span>
+                                                <span className="w-color-2 col-6 d-flex justify-content-end">${totalPrice}</span>
                                             </div>
                                             <div className="col-12 d-flex total-a mt-3 pt-2">
                                                 <span className="w-color-2 col-6">Total Amount</span>
-                                                <span className="w-color-2 col-6 d-flex justify-content-end">{totalPrice}$</span>
+                                                <span className="w-color-2 col-6 d-flex justify-content-end">${totalPrice}</span>
                                             </div>
 
                                             <div

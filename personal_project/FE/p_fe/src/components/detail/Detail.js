@@ -4,8 +4,8 @@ import * as CourseService from "../../services/CourseService";
 import {useEffect, useRef, useState} from "react";
 import {Helmet} from "react-helmet";
 import lockVideo from "../../statics/assets/detail_course/bg-video-lock.png"
-import {toast} from "react-toastify";
-export function Detail() {
+import {Bounce, toast} from "react-toastify";
+export function Detail({changeFlagApp}) {
 
     const [course, setCourse] = useState();
     const [chapters, setChapters] = useState([]);
@@ -25,7 +25,18 @@ export function Detail() {
             let id = course.id;
             const res = await CourseService.addToCart(id);
             if (res) {
-                toast.success("Course added to cart");
+                changeFlagApp();
+                toast.success('Added to cart', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
             }
         } catch (e) {
             console.log(e);
@@ -71,7 +82,7 @@ export function Detail() {
         <>
             <Helmet>
                 <link rel="stylesheet"
-                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"/>
             </Helmet>
 
             <div className="container-course-detail">

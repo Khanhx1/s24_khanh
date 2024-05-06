@@ -18,6 +18,7 @@ function App() {
     const [isShowLogin, setIsShowLogin] = useState(false);
     const [userLogin, setUserLogin] = useState("");
     const [flagApp, setFlagApp] = useState(false);
+    const [quantityCart, setQuantityCart] = useState(0);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -35,7 +36,11 @@ function App() {
             const token = localStorage.getItem("token");
             const res = await LoginService.getInfo(token);
             if (res) {
-                setUserLogin(res);
+                const info = res.split(",");
+                const name = info[0];
+                const quantity = info[1];
+                setQuantityCart(quantity);
+                setUserLogin(name);
             }
         } catch (e) {
             console.log(e);
@@ -52,11 +57,11 @@ function App() {
    <>
        <ToastContainer/>
    <BrowserRouter>
-       <Header openModalLogin={openModalLogin} userLogin={userLogin}/>
+       <Header openModalLogin={openModalLogin} userLogin={userLogin} quantityCart={quantityCart}/>
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
-         <Route path={"/course/:id"} element={<Detail/>}></Route>
+         <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp}/>}></Route>
          <Route path={"/cart"} element={<Cart/>}></Route>
      </Routes>
        <Footer/>
