@@ -2,12 +2,15 @@ package org.example.p_be.services.impl;
 
 import org.example.p_be.dto.ICourseDto;
 import org.example.p_be.models.Course;
+import org.example.p_be.models.OrderCourse;
 import org.example.p_be.repositories.ICourseRepository;
 import org.example.p_be.services.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CourseService implements ICourseService {
@@ -46,5 +49,10 @@ public class CourseService implements ICourseService {
     @Override
     public Course findById(Integer id) {
         return iCourseRepository.findCourseById(id);
+    }
+
+    @Override
+    public List<Course> findAllCartById(Integer id) {
+        return iCourseRepository.findAllCartById(id);
     }
 }

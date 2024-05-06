@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/cart")
@@ -42,6 +44,16 @@ public class CartController {
         orderCourse.setDelete(false);
         iCartService.saveCart(orderCourse);
         return new ResponseEntity<>("successfull", HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getAllCart(@RequestHeader("Authorization")String token) {
+        String newToken = token.substring(7);
+        String username = jwtService.getUsernameFromJwtToken(newToken);
+        User user = iUserService.findUserByUsername(username);
+        Integer id = user.getId();
+        List<Course> orderCourses = iCourseService.findAllCartById(id);
+        return new ResponseEntity<>(orderCourses, HttpStatus.OK);
     }
 
 }
