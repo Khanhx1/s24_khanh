@@ -10,4 +10,6 @@ public interface ICartService {
     List<OrderCourse> getAll();
 
     void deleteByCustomerAndCourse(Integer idCourse, Integer idCustomer);
+
+    OrderCourse findCourseByIdCustomerAndIdCourse(Integer idCustomer, Integer idCourse);
 }

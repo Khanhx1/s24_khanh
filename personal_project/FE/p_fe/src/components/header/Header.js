@@ -3,14 +3,17 @@ import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import "../../statics/css/Header.css"
 import {Helmet} from "react-helmet";
 import {Link, useNavigate} from "react-router-dom";
+import * as LoginService from "../../services/LoginService";
+import {Bounce, toast} from "react-toastify";
 
-export function Header({openModalLogin, userLogin, quantityCart}) {
+
+export function Header({openModalLogin, userLogin, quantityCart, isLogin, changeFlagApp}) {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [nameCurrentUser, setNameCurrentUser] = useState(userLogin);
-    const [cartNumber, setCartNumber] = useState(quantityCart);
+    const [nameCurrentUser, setNameCurrentUser] = useState("");
+    const [cartNumber, setCartNumber] = useState();
     const [dropDownNonLogin, setDropDownNonLogin] = useState(false);
     const [dropDownLogin, setDropDownLogin] = useState(false);
-
+    const [flagHeader, setFlagHeader] = useState(false);
 
     const navigation = useNavigate();
 
@@ -18,7 +21,7 @@ export function Header({openModalLogin, userLogin, quantityCart}) {
     useEffect(() => {
         setNameCurrentUser(userLogin);
         setCartNumber(quantityCart);
-    }, [userLogin, quantityCart]);
+    }, [userLogin, quantityCart, isLogin]);
 
 
     const handleShowDropDown = () => {
@@ -27,6 +30,31 @@ export function Header({openModalLogin, userLogin, quantityCart}) {
 
     const redirectToCart = () => {
         navigation("/cart");
+    }
+
+
+    const handleLogout = async () => {
+        try {
+            const res = await LoginService.logout();
+            if (res) {
+                localStorage.removeItem("token");
+                changeFlagApp();
+                setDropDownLogin(false);
+                toast.success('Logout successfully', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     useEffect(() => {
@@ -51,21 +79,34 @@ export function Header({openModalLogin, userLogin, quantityCart}) {
 
             <Navbar expand="lg" className={isScrolled ? "fixed-top s2k pt-3 pb-3" : "fixed-top s1k pt-3 pb-3"}>
                 <Container>
-                    <Navbar.Brand href="#home" className="k-brand">K Academy</Navbar.Brand>
+                    <Navbar.Brand><p className="k-brand c-mb-0" onClick={()=>{navigation("/")}}>K Academy</p></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="align-items-lg-center ms-auto me-lg-5 head-tag">
-                            <Nav.Link href="#">Course</Nav.Link>
-                            <Nav.Link href="#">Free</Nav.Link>
-                            <Nav.Link href="#">Guide</Nav.Link>
-                            <Nav.Link href="#">About us</Nav.Link>
-                            <Nav.Link href="#">Contact</Nav.Link>
+                            <Nav.Link><p className="cus-title-nav" onClick={() => {
+                                navigation("/course")
+                            }}>Course</p></Nav.Link>
+                            <Nav.Link><p className="cus-title-nav" onClick={() => {
+                                navigation("/")
+                            }}>Free</p></Nav.Link>
+                            <Nav.Link><p className="cus-title-nav" onClick={() => {
+                                navigation("/")
+                            }}>Guide</p></Nav.Link>
+                            <Nav.Link><p className="cus-title-nav" onClick={() => {
+                                navigation("/")
+                            }}>Contact</p></Nav.Link>
+                            <Nav.Link><p className="cus-title-nav" onClick={() => {
+                                navigation("/")
+                            }}>About us</p></Nav.Link>
+
 
                             <div className="position-relative ms-3 d-flex ">
 
-                                {nameCurrentUser ? (
+                                {isLogin ? (
                                         <p className="login-btn-head d-flex justify-content-center align-items-center"
-                                        onClick={()=>{handleShowDropDown()}}>
+                                           onClick={() => {
+                                               handleShowDropDown()
+                                           }}>
                                             {nameCurrentUser}
                                         </p>)
                                     : (<p
@@ -75,12 +116,14 @@ export function Header({openModalLogin, userLogin, quantityCart}) {
                                         }}>Login</p>)}
 
                                 {
-                                    dropDownLogin? (
+                                    dropDownLogin ? (
                                         <div className="ct-dropdown-login">
                                             <p>My Course</p>
                                             <p>Info</p>
                                             <p>Order</p>
-                                            <p>Logout</p>
+                                            <p onClick={() => {
+                                                handleLogout()
+                                            }}>Logout</p>
                                         </div>
                                     ) : (<></>)
                                 }
@@ -88,11 +131,13 @@ export function Header({openModalLogin, userLogin, quantityCart}) {
 
 
                             {
-                                nameCurrentUser ? (<div className="ms-3 position-relative d-flex">
+                                isLogin ? (<div className="ms-3 position-relative d-flex">
                                     <div className="d-flex justify-content-center align-items-center position-relative">
 
                                             <span
-                                                className="material-symbols-outlined icon-cart-head" onClick={()=>{redirectToCart()}}>shopping_bag</span>
+                                                className="material-symbols-outlined icon-cart-head" onClick={() => {
+                                                redirectToCart()
+                                            }}>shopping_bag</span>
 
                                     </div>
                                     <div

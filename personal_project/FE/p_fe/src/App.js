@@ -19,11 +19,18 @@ function App() {
     const [userLogin, setUserLogin] = useState("");
     const [flagApp, setFlagApp] = useState(false);
     const [quantityCart, setQuantityCart] = useState(0);
+    const [isLogin, setIsLogin] = useState(false);
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token !== undefined) {
+        if (token) {
             loadUserLogin();
+        } else {
+            console.log("set false")
+            setIsLogin(false);
+            setUserLogin("unknown");
+            setQuantityCart("99");
         }
     }, [flagApp]);
 
@@ -33,14 +40,15 @@ function App() {
 
     const loadUserLogin = async () => {
         try {
-            const token = localStorage.getItem("token");
-            const res = await LoginService.getInfo(token);
+
+            const res = await LoginService.getInfo();
             if (res) {
                 const info = res.split(",");
                 const name = info[0];
                 const quantity = info[1];
                 setQuantityCart(quantity);
                 setUserLogin(name);
+                setIsLogin(true);
             }
         } catch (e) {
             console.log(e);
@@ -57,11 +65,11 @@ function App() {
    <>
        <ToastContainer/>
    <BrowserRouter>
-       <Header openModalLogin={openModalLogin} userLogin={userLogin} quantityCart={quantityCart}/>
+       <Header openModalLogin={openModalLogin} userLogin={userLogin} quantityCart={quantityCart} isLogin={isLogin} changeFlagApp={changeFlagApp}/>
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
-         <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp}/>}></Route>
+         <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp} flagApp={flagApp}/>}></Route>
          <Route path={"/cart"} element={<Cart changeFlagApp={changeFlagApp}/>}></Route>
      </Routes>
        <Footer/>

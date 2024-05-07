@@ -43,3 +43,13 @@ export const addToCart = async (id) => {
         console.log(e);
     }
 }
+
+export const checkDetailStatus = async (id) => {
+    try {
+        const res = await axiosCof.get(`http://localhost:8080/api/cart/checkCourseStatus?id=${id}`);
+        console.log(res.data)
+        return res.data;
+    }catch (e) {
+        console.log(e);
+    }
+}

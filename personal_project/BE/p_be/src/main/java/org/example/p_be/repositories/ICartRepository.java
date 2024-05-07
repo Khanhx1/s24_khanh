@@ -15,4 +15,7 @@ public interface ICartRepository extends JpaRepository<OrderCourse, Integer> {
     @Modifying
     @Query(value = "delete from order_course where order_course.id_course = :idCourse and order_course.id_customer = :idCustomer", nativeQuery = true)
     void deleteByCustomerAndCourse(@Param("idCourse") Integer idCourse, @Param("idCustomer") Integer idCustomer);
+
+    @Query(value = "SELECT * FROM personal_project_sp1.order_course where id_course = :idCourse and id_customer = :idCustomer", nativeQuery = true)
+    OrderCourse findCourseByIdCustomerAndIdCourse(@Param("idCustomer") Integer idCustomer,@Param("idCourse") Integer idCourse);
 }

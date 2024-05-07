@@ -27,4 +27,9 @@ public class CartService implements ICartService {
     public void deleteByCustomerAndCourse(Integer idCourse, Integer idCustomer) {
         iCartRepository.deleteByCustomerAndCourse(idCourse, idCustomer);
     }
+
+    @Override
+    public OrderCourse findCourseByIdCustomerAndIdCourse(Integer idCustomer, Integer idCourse) {
+        return iCartRepository.findCourseByIdCustomerAndIdCourse(idCustomer, idCourse);
+    }
 }

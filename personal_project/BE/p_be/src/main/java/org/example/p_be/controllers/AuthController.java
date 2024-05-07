@@ -73,10 +73,9 @@ public class AuthController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<?> logoutSuccessful(@RequestHeader("Authorization")String token){
-        String newToken = token.substring(7);
-        jwtService.addToBlackList(newToken);
+    @GetMapping("/logout")
+    public ResponseEntity<?> logoutSuccessful(){
+        SecurityContextHolder.clearContext();
         return ResponseEntity.ok("ok dang xuat");
     }
 

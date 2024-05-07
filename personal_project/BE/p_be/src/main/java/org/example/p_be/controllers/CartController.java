@@ -79,4 +79,25 @@ public class CartController {
         return ResponseEntity.ok("delete cart successfully");
     }
 
+    @GetMapping("/checkCourseStatus")
+    public ResponseEntity<?> checkCourseStatus(@RequestParam("id") Integer idCourse, @RequestHeader("Authorization") String token) {
+        String newToken = token.substring(7);
+        String username = jwtService.getUsernameFromJwtToken(newToken);
+        User user = iUserService.findUserByUsername(username);
+        Integer idCustomer = user.getCustomer().getId();
+        OrderCourse orderCourse = iCartService.findCourseByIdCustomerAndIdCourse(idCustomer, idCourse);
+        String status = "original";
+        if (orderCourse != null) {
+            if (orderCourse.getReceipt() != null) {
+                status = "purchased";
+            } else {
+                status = "cart";
+            }
+        } else {
+            status = "original";
+        }
+
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
 }

@@ -10,9 +10,19 @@ export const login = async (user) => {
     }
 }
 
-export const getInfo = async (token) => {
+export const getInfo = async () => {
     try {
-        const res = await axiosCof.get(`http://localhost:8080/api/auth/getInfoCart`, token);
+        const res = await axiosCof.get(`http://localhost:8080/api/auth/getInfoCart`);
+        console.log(res.data)
+        return res.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const logout = async () => {
+    try {
+        const res = await axiosCof.get(`http://localhost:8080/api/auth/logout`);
         console.log(res.data)
         return res.data;
     } catch (e) {

@@ -102,6 +102,32 @@
     border-color: #fc6a1e;
     color: #fc6a1e;
 }
+.custom-add-to-cart-iyc {
+    background: transparent;
+    border: 2px solid #9f9f9f;
+    color: #9f9f9f;
+    padding: 8px 30px 10px 30px;
+    font-size: 18px;
+    border-radius: 40px;
+}
+.custom-add-to-cart-purchased {
+    background: transparent;
+    border: 2px solid #07bc0c;
+    color: #07bc0c;
+    padding: 8px 30px 10px 30px;
+    font-size: 18px;
+    border-radius: 40px;
+}
+
+.ex-btn-cart {
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    transition: color 0.3s ease;
+}
+.ex-btn-cart:hover {
+    color: #fc6a1e;
+}
 
 .se-detail {
     background-color: #282828;

@@ -1,11 +1,12 @@
 import "../../statics/css/Detail.css"
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import * as CourseService from "../../services/CourseService";
 import {useEffect, useRef, useState} from "react";
 import {Helmet} from "react-helmet";
 import lockVideo from "../../statics/assets/detail_course/bg-video-lock.png"
 import {Bounce, toast} from "react-toastify";
-export function Detail({changeFlagApp}) {
+
+export function Detail({changeFlagApp, flagApp}) {
 
     const [course, setCourse] = useState();
     const [chapters, setChapters] = useState([]);
@@ -15,10 +16,35 @@ export function Detail({changeFlagApp}) {
     const {id} = useParams();
     const videoSectionRef = useRef(null);
 
+    const [statusDetail, setStatusDetail] = useState("original");
+
 
     useEffect(() => {
         getCourse();
     }, []);
+
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (token) {
+            checkCourseStatus();
+        } else {
+            setStatusDetail("original");
+        }
+    }, [flagApp]);
+
+    const checkCourseStatus = async () => {
+        try {
+            const status = await CourseService.checkDetailStatus(id);
+            setStatusDetail(status);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        console.log(statusDetail);
+    }, [statusDetail]);
+
 
     const handleAddToCart = async () => {
         try {
@@ -75,6 +101,31 @@ export function Detail({changeFlagApp}) {
     };
 
 
+    let buttonCart;
+    let exButtonCart;
+    switch (statusDetail) {
+        case "original":
+            buttonCart = <button className="custom-add-to-cart" onClick={() => {
+                handleAddToCart()
+            }}>Add to cart
+            </button>;
+            exButtonCart = <></>;
+            break;
+        case "purchased":
+            buttonCart = <button disabled={true} className="custom-add-to-cart-purchased">Purchased</button>;
+            exButtonCart =
+                <Link to={"/myCourse"} className="w-color-1 ex-btn-cart mx-3 d-flex align-items-center">go to your
+                    course <span className="material-symbols-outlined"> navigate_next </span></Link>;
+            break;
+        case "cart":
+            buttonCart = <button disabled={true} className="custom-add-to-cart-iyc">Added to cart</button>;
+            exButtonCart = <div className="d-flex justify-content-center align-items-center"><Link to={"/cart"}
+                                                                                                   className="w-color-1 ex-btn-cart mx-3 d-flex align-items-center">go
+                to your cart <span className="material-symbols-outlined"> navigate_next </span> </Link></div>;
+            break;
+    }
+
+
     if (!course) {
         return (<div>Loading</div>)
     }
@@ -113,9 +164,18 @@ export function Detail({changeFlagApp}) {
                                 <p className="custom-title-price">Price:</p>
                                 <p className="custom-price-detail">${course.price}</p>
                             </div>
-                            <div ref={videoSectionRef}>
-                                <button className="custom-add-to-cart" onClick={()=>{handleAddToCart()}}>Add to cart</button>
+
+                            <div className="d-flex c-r-wrap">
+                                {
+                                    buttonCart
+                                }
+                                {
+                                    exButtonCart
+                                }
+
                             </div>
+
+                            <div ref={videoSectionRef}></div>
 
                         </div>
                         <div className="col-lg-5 col-md-12 col-sm-12 px-4 item-2">
@@ -137,7 +197,8 @@ export function Detail({changeFlagApp}) {
                         <div className="d-flex justify-content-center align-items-center mb-5">
                             {
                                 isLockCourse ? (
-                                    <div className="d-flex justify-content-center align-items-center position-relative ct-lock-video">
+                                    <div
+                                        className="d-flex justify-content-center align-items-center position-relative ct-lock-video">
                                         <img
                                             src={lockVideo}
                                             className="cus-lock-video-detail position-relative"
@@ -174,7 +235,7 @@ export function Detail({changeFlagApp}) {
                                         <p className="col-10">{index + 1 + ". " + item}</p>
                                         <div
                                             className="d-flex justify-content-end align-items-center px-2 custom-lock-detail col-2">
-                                            {index == 0 ? (<></>): (
+                                            {index == 0 ? (<></>) : (
                                                 <span className="material-symbols-outlined">lock</span>
                                             )
                                             }
