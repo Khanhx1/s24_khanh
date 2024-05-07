@@ -3,30 +3,38 @@ import "../../statics/css/Cart.css"
 import {Helmet} from "react-helmet";
 import * as CartCourseService from "../../services/CartCourseService"
 import {Link} from "react-router-dom";
+import {Bounce, toast} from "react-toastify";
 
-export function Cart() {
+export function Cart({changeFlagApp}) {
 
     const [cart, setCart] = useState([]);
     const [totalCourse, setTotalCourse] = useState(0);
-    const [isEmpty, setIsEmpty] = useState(true);
+    const [isEmpty, setIsEmpty] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [flagCart, setFlagCart] = useState(false);
 
     useEffect(() => {
         getCart();
-    }, []);
+    }, [flagCart]);
 
     const getCart = async () => {
         try {
             const list = await CartCourseService.getCart();
             if (list) {
-                setCart(list);
-                setTotalCourse(list.length);
-                setIsEmpty(false);
-                let total = 0;
-                for (let i = 0; i < list.length; i++) {
-                    total += list[i].price;
+                if (list.length === 0) {
+                    setIsEmpty(true);
+                    setTotalCourse(0);
+                    setTotalPrice(0);
+                } else {
+                    setCart(list);
+                    setTotalCourse(list.length);
+                    setIsEmpty(false);
+                    let total = 0;
+                    for (let i = 0; i < list.length; i++) {
+                        total += list[i].price;
+                    }
+                    setTotalPrice(total);
                 }
-                setTotalPrice(total);
             } else {
                 setIsEmpty(true);
             }
@@ -36,8 +44,27 @@ export function Cart() {
         }
     }
 
-    const handleRemoveCart = (id) => {
-
+    const handleRemoveCart = async (id) => {
+        try {
+            const res = await CartCourseService.deleteCartById(id);
+            if (res) {
+                changeFlagApp();
+                setFlagCart(!flagCart);
+                toast.success('Removed a course', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (

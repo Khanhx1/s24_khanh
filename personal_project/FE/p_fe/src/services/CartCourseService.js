@@ -9,3 +9,13 @@ export const getCart = async () => {
         console.log(e);
     }
 }
+
+export const deleteCartById = async (id) => {
+    try {
+        const res = await axiosCof.get(`http://localhost:8080/api/cart/deleteByIdCourse?id=${id}`);
+        console.log(res.data)
+        return res.data;
+    }catch (e) {
+        console.log(e);
+    }
+}

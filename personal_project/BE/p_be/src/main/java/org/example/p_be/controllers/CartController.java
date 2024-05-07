@@ -70,7 +70,7 @@ public class CartController {
     }
 
     @GetMapping("/deleteByIdCourse")
-    public ResponseEntity<?> deleteCartById(@RequestParam("id") Integer idCourse, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> deleteCartByIdCourse(@RequestParam("id") Integer idCourse, @RequestHeader("Authorization") String token) {
         String newToken = token.substring(7);
         String username = jwtService.getUsernameFromJwtToken(newToken);
         User user = iUserService.findUserByUsername(username);

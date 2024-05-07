@@ -62,7 +62,7 @@ function App() {
        <Route path={"/"} element={<Home/>}></Route>
          <Route path={"/course"} element={<Course/>}></Route>
          <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp}/>}></Route>
-         <Route path={"/cart"} element={<Cart/>}></Route>
+         <Route path={"/cart"} element={<Cart changeFlagApp={changeFlagApp}/>}></Route>
      </Routes>
        <Footer/>
    </BrowserRouter>
