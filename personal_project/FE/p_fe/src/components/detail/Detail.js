@@ -6,7 +6,7 @@ import {Helmet} from "react-helmet";
 import lockVideo from "../../statics/assets/detail_course/bg-video-lock.png"
 import {Bounce, toast} from "react-toastify";
 
-export function Detail({changeFlagApp, flagApp}) {
+export function Detail({changeFlagApp, flagApp, openModalLogin}) {
 
     const [course, setCourse] = useState();
     const [chapters, setChapters] = useState([]);
@@ -63,6 +63,8 @@ export function Detail({changeFlagApp, flagApp}) {
                     theme: "light",
                     transition: Bounce,
                 });
+            } else {
+                openModalLogin();
             }
         } catch (e) {
             console.log(e);
@@ -78,6 +80,7 @@ export function Detail({changeFlagApp, flagApp}) {
             setCurrentChapter(chapters[0]);
             let categories = res.categories.split(",");
             setCategories(categories);
+            changeFlagApp();
 
         } catch (e) {
             console.log(e);
@@ -187,89 +190,90 @@ export function Detail({changeFlagApp, flagApp}) {
 
                 </div>
 
-                <div className="se-detail">
-                    <div className="se-detail-container col-7">
-                        <div className="d-flex justify-content-center align-items-center col-12 mb-3">
-                            <h3 className="w-color-1 w-wrap cus-title-video-detail">
-                                {currentChapter}
-                            </h3>
-                        </div>
-                        <div className="d-flex justify-content-center align-items-center mb-5">
-                            {
-                                isLockCourse ? (
-                                    <div
-                                        className="d-flex justify-content-center align-items-center position-relative ct-lock-video">
-                                        <img
-                                            src={lockVideo}
-                                            className="cus-lock-video-detail position-relative"
-                                        />
-                                        <div className="position-absolute ct-content-lock-d">
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <span className="material-symbols-outlined w-color-1 c-l-i">lock</span>
-                                            </div>
-                                            <p className="title-lock-video-de">Please buy this course to unlock all
-                                                lessons</p>
-                                            <div className="d-flex justify-content-center align-items-center mt-3">
-                                                <button className="unlock-btn">Unlock now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <video className="custom-video-detail" controls>
-                                        <source src={course.videoDemo} type="video/mp4"/>
-                                        Your browser does not support the video tag.
-                                    </video>
-                                )
-                            }
 
-
-                        </div>
-                        <h4 className="d-flex justify-content-center">Lessons in this course</h4>
-                        <h5>{chapters.length} lessons</h5>
+                {/*<div>aa</div>*/}
+            </div>
+            <div className="se-detail">
+                <div className="se-detail-container col-7">
+                    <div className="d-flex justify-content-center align-items-center col-12 mb-3">
+                        <h3 className="w-color-1 w-wrap cus-title-video-detail">
+                            {currentChapter}
+                        </h3>
+                    </div>
+                    <div className="d-flex justify-content-center align-items-center mb-5">
                         {
-                            course.titleChapter && (
-                                chapters.map((item, index) => (
-                                    <div className="d-flex block-title-chapter" key={index} onClick={() => {
-                                        handleChangeChapter(index)
-                                    }}>
-                                        <p className="col-10">{index + 1 + ". " + item}</p>
-                                        <div
-                                            className="d-flex justify-content-end align-items-center px-2 custom-lock-detail col-2">
-                                            {index == 0 ? (<></>) : (
-                                                <span className="material-symbols-outlined">lock</span>
-                                            )
-                                            }
+                            isLockCourse ? (
+                                <div
+                                    className="d-flex justify-content-center align-items-center position-relative ct-lock-video">
+                                    <img
+                                        src={lockVideo}
+                                        className="cus-lock-video-detail position-relative"
+                                    />
+                                    <div className="position-absolute ct-content-lock-d">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <span className="material-symbols-outlined w-color-1 c-l-i">lock</span>
+                                        </div>
+                                        <p className="title-lock-video-de">Please buy this course to unlock all
+                                            lessons</p>
+                                        <div className="d-flex justify-content-center align-items-center mt-3">
+                                            <button className="unlock-btn">Unlock now</button>
                                         </div>
                                     </div>
-                                ))
+                                </div>
+                            ) : (
+                                <video className="custom-video-detail" controls>
+                                    <source src={course.videoDemo} type="video/mp4"/>
+                                    Your browser does not support the video tag.
+                                </video>
                             )
                         }
-                    </div>
 
-                </div>
-
-                <div className="third-detail d-flex justify-content-center">
-                    <div className="extra-description px-2 col-9">
-                        <h2 className="mb-5">About this course</h2>
-                        <div className="d-flex justify-content-center align-items-center mb-5">
-                            <img src={course.img} className="custom-img-extra-description"/>
-                        </div>
-                        <p>{course.extraDescription}</p>
-                        <p>{course.description}</p>
-                        <p>Instructor: {course.instructor}</p>
-                        <p>Target lesson: {course.targetLesson}</p>
-                    </div>
-                </div>
-
-                <div className="four-detail d-flex justify-content-center">
-                    <div className="recommendation-detail col-9 pb-4">
-                        <h3>Recommend</h3>
 
                     </div>
-
+                    <h4 className="d-flex justify-content-center">Lessons in this course</h4>
+                    <h5>{chapters.length} lessons</h5>
+                    {
+                        course.titleChapter && (
+                            chapters.map((item, index) => (
+                                <div className="d-flex block-title-chapter" key={index} onClick={() => {
+                                    handleChangeChapter(index)
+                                }}>
+                                    <p className="col-10">{index + 1 + ". " + item}</p>
+                                    <div
+                                        className="d-flex justify-content-end align-items-center px-2 custom-lock-detail col-2">
+                                        {index == 0 ? (<></>) : (
+                                            <span className="material-symbols-outlined">lock</span>
+                                        )
+                                        }
+                                    </div>
+                                </div>
+                            ))
+                        )
+                    }
                 </div>
 
             </div>
+
+            <div className="third-detail d-flex justify-content-center pb-5">
+                <div className="extra-description px-2 col-9">
+                    <h2 className="mb-5">About this course</h2>
+                    <div className="d-flex justify-content-center align-items-center mb-5">
+                        <img src={course.img} className="custom-img-extra-description"/>
+                    </div>
+                    <p>{course.extraDescription}</p>
+                    <p>{course.description}</p>
+                    <p>Instructor: {course.instructor}</p>
+                    <p>Target lesson: {course.targetLesson}</p>
+                </div>
+            </div>
+
+            {/*<div className="four-detail d-flex justify-content-center">*/}
+            {/*    <div className="recommendation-detail col-9 pb-4">*/}
+            {/*        <h3>Recommend</h3>*/}
+
+            {/*    </div>*/}
+
+            {/*</div>*/}
         </>
     )
 }

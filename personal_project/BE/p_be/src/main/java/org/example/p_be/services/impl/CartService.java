@@ -1,5 +1,7 @@
 package org.example.p_be.services.impl;
 
+import org.example.p_be.models.Course;
+import org.example.p_be.models.Customer;
 import org.example.p_be.models.OrderCourse;
 import org.example.p_be.repositories.ICartRepository;
 import org.example.p_be.services.ICartService;
@@ -31,5 +33,20 @@ public class CartService implements ICartService {
     @Override
     public OrderCourse findCourseByIdCustomerAndIdCourse(Integer idCustomer, Integer idCourse) {
         return iCartRepository.findCourseByIdCustomerAndIdCourse(idCustomer, idCourse);
+    }
+
+    @Override
+    public void cleanAllCart(Integer idCustomer, Integer idReceipt) {
+        iCartRepository.cleanAllCart(idCustomer, idReceipt);
+    }
+
+    @Override
+    public List<OrderCourse> findAllByCustomer(Customer customer) {
+        return iCartRepository.findAllByCustomer(customer);
+    }
+
+    @Override
+    public List<OrderCourse> findAllBillByIdCustomer(Integer id) {
+        return iCartRepository.findAllBillByIdCustomer(id);
     }
 }

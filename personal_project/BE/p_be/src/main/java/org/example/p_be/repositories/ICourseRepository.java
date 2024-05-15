@@ -73,7 +73,7 @@ public interface ICourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "SELECT course.id, course.audio, course.description, course.extra_description, course.img, \n" +
             "course.instructor, course.is_delete, course.name, course.price, course.target_lesson, \n" +
             "course.title_chapter, course.total_user, course.video_demo, \n" +
-            "GROUP_CONCAT(category.name ORDER BY category.name SEPARATOR ',') AS categories\n" +
+            "GROUP_CONCAT(category.name ORDER BY category.name SEPARATOR ', ') AS categories\n" +
             "FROM course\n" +
             "JOIN course_category ON course_category.id_course = course.id\n" +
             "JOIN category ON course_category.id_category = category.id\n" +
@@ -81,4 +81,6 @@ public interface ICourseRepository extends JpaRepository<Course, Integer> {
             "where order_course.id_receipt is null and order_course.id_customer = :id \n" +
             "GROUP BY course.id", nativeQuery = true)
     List<Course> findAllCartByIdCustomer(@Param("id") Integer id);
+
+
 }

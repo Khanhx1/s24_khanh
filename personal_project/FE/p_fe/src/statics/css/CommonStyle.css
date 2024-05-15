@@ -24,3 +24,48 @@ body {
 .c-r-wrap {
     flex-wrap: wrap;
 }
+.kpp p {
+    font-size: 50px;
+    color: white;
+}
+.kpp {
+    flex-wrap: wrap;
+    padding-top: 228px;
+    padding-bottom: 265px;
+}
+.kpp a {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    transition: color 0.3s ease;
+}
+.kpp a:hover {
+    color: #fa7624;
+}
+.kus {
+    margin-top: 130px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+/*.kus th {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.kus td {*/
+/*    text-align: center;*/
+/*}*/
+.trasd p {
+    color: white;
+    cursor: pointer;
+}
+.trasd h4 {
+    color: white;
+    margin-bottom: 25px;
+}
+.mius {
+    flex-wrap: wrap;
+}
+.c-warning {
+    color: red;
+    margin: 0px 75px;
+}

@@ -2,8 +2,18 @@ import {useEffect, useState} from "react";
 import "../../statics/css/Cart.css"
 import {Helmet} from "react-helmet";
 import * as CartCourseService from "../../services/CartCourseService"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Bounce, toast} from "react-toastify";
+
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
+import {Checkout} from "../checkout/Checkout";
+import {useUserData} from "../context/useUserData";
+
+
 
 export function Cart({changeFlagApp}) {
 
@@ -12,10 +22,48 @@ export function Cart({changeFlagApp}) {
     const [isEmpty, setIsEmpty] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
     const [flagCart, setFlagCart] = useState(false);
+    const { userData, setUserData } = useUserData();
+    const navigation = useNavigate();
+
+//config paypal
+    const initialOptions = {
+        "client-id": "AQkVcfCC4gtSsWWfENoWhryiWDSJIi_6H8F4YHt5OGGLVjurFs8JkxyR4EgqNTItisPYgcZjrlMKJ0ie",
+        currency: "USD",
+        intent: "capture",
+    };
+
 
     useEffect(() => {
         getCart();
     }, [flagCart]);
+
+
+    const cleanAllCart = async () => {
+        try {
+
+            const res = await CartCourseService.cleanAllCart();
+            if (res) {
+                setFlagCart(!flagCart);
+                navigation("/paymentSuccess");
+            } else {
+                console.log("loi r")
+                toast.error('occur a error', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const getCart = async () => {
         try {
@@ -25,6 +73,7 @@ export function Cart({changeFlagApp}) {
                     setIsEmpty(true);
                     setTotalCourse(0);
                     setTotalPrice(0);
+                    changeFlagApp();
                 } else {
                     setCart(list);
                     setTotalCourse(list.length);
@@ -34,6 +83,8 @@ export function Cart({changeFlagApp}) {
                         total += list[i].price;
                     }
                     setTotalPrice(total);
+                    setUserData(total);
+                    changeFlagApp();
                 }
             } else {
                 setIsEmpty(true);
@@ -51,6 +102,18 @@ export function Cart({changeFlagApp}) {
                 changeFlagApp();
                 setFlagCart(!flagCart);
                 toast.success('Removed a course', {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } else {
+                toast.error('occur a error', {
                     position: "bottom-right",
                     autoClose: 1500,
                     hideProgressBar: false,
@@ -93,7 +156,7 @@ export function Cart({changeFlagApp}) {
                                                     <p className="w-color-1 cus-empty-cart">Your cart is empty</p>
                                                 ) : (
                                                     cart.map((item) => (
-                                                        <div className="item-cart mx-3 mb-4">
+                                                        <div className="item-cart mx-3 mb-4" key={item.id}>
                                                             <div
                                                                 className="d-flex justify-content-center ct-img-cart col-4 mt-4 mb-3">
 
@@ -115,7 +178,7 @@ export function Cart({changeFlagApp}) {
                                                                     <p className="w-color-2 p-content-cart mb-2">Instructor:
                                                                         {item.instructor}</p>
                                                                     <p className="w-color-2 p-content-cart mb-2">Tags:
-                                                                        Course</p>
+                                                                        {item.categories}</p>
 
                                                                 </div>
                                                                 <div className="col-3 d-flex justify-content-end">
@@ -140,6 +203,9 @@ export function Cart({changeFlagApp}) {
                                         }
 
 
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -161,10 +227,16 @@ export function Cart({changeFlagApp}) {
                                                 className="col-12 btn-pay mt-4 d-flex justify-content-center align-items-center">
                                                 Check out
                                             </div>
-                                            <div
-                                                className="col-12 btn-paypal mt-3 d-flex justify-content-center align-items-center">
-                                                PayPal
-                                            </div>
+                                            {
+                                                totalPrice != 0 ? (
+                                                    <div className="mt-3">
+                                                        <PayPalScriptProvider options={initialOptions}>
+                                                            <Checkout cleanAllCart={cleanAllCart}/>
+                                                        </PayPalScriptProvider>
+                                                    </div>
+                                                ):(<></>)
+                                            }
+
 
                                         </div>
                                     </div>

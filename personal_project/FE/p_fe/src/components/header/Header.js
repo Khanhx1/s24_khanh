@@ -7,7 +7,7 @@ import * as LoginService from "../../services/LoginService";
 import {Bounce, toast} from "react-toastify";
 
 
-export function Header({openModalLogin, userLogin, quantityCart, isLogin, changeFlagApp}) {
+export function Header({openModalLogin, userLogin, quantityCart, isLogin, changeFlagApp, flagApp}) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [nameCurrentUser, setNameCurrentUser] = useState("");
     const [cartNumber, setCartNumber] = useState();
@@ -120,7 +120,7 @@ export function Header({openModalLogin, userLogin, quantityCart, isLogin, change
                                         <div className="ct-dropdown-login">
                                             <p>My Course</p>
                                             <p>Info</p>
-                                            <p>Order</p>
+                                            <p onClick={()=>{navigation("/order"); setDropDownLogin(!dropDownLogin)}}>Order</p>
                                             <p onClick={() => {
                                                 handleLogout()
                                             }}>Logout</p>

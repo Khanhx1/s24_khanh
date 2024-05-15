@@ -28,7 +28,7 @@ export function Home() {
                         <div className="col-12 text-center w-color">
                             <p>Get now</p>
                             <h1>Become MP</h1>
-                            <Link to={"/"} className="btn btn-warning mt-4 custom-btn-home-s1">Join now</Link>
+                            <Link to={"/course"} className="btn btn-warning mt-4 custom-btn-home-s1">Join now</Link>
                         </div>
 
                     </div>
@@ -186,10 +186,6 @@ export function Home() {
                     </div>
                 </div>
 
-
-                <div>
-                    Khanh
-                </div>
 
 
             </div>

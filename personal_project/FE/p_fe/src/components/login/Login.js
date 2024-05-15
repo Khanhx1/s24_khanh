@@ -99,7 +99,7 @@ export function Login({closeModalLogin, changeFlagApp}) {
                             </div>
 
                         </div>
-                        <div>
+                        <div className="d-flex justify-content-start align-items-center c-warning">
                             <p>{errorMessage}</p>
                         </div>
                         <div className="d-flex justify-content-center align-items-center custom-btn-login-container">

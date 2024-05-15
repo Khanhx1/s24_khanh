@@ -14,6 +14,9 @@ import {Cart} from "./components/cart/Cart";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css"
 import * as LoginService from "./services/LoginService"
+import {UserDataProvider} from "./components/context/useUserData";
+import {PurchasedSuccessfully} from "./components/payment/PurchasedSuccessfully";
+import {Order} from "./components/historyOrder/Order";
 function App() {
     const [isShowLogin, setIsShowLogin] = useState(false);
     const [userLogin, setUserLogin] = useState("");
@@ -63,18 +66,22 @@ function App() {
     }
   return (
    <>
+       <UserDataProvider>
        <ToastContainer/>
    <BrowserRouter>
-       <Header openModalLogin={openModalLogin} userLogin={userLogin} quantityCart={quantityCart} isLogin={isLogin} changeFlagApp={changeFlagApp}/>
+       <Header openModalLogin={openModalLogin} userLogin={userLogin} quantityCart={quantityCart} isLogin={isLogin} changeFlagApp={changeFlagApp} flagApp={flagApp}/>
      <Routes>
        <Route path={"/"} element={<Home/>}></Route>
-         <Route path={"/course"} element={<Course/>}></Route>
-         <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp} flagApp={flagApp}/>}></Route>
+         <Route path={"/course"} element={<Course changeFlagApp={changeFlagApp}/>}></Route>
+         <Route path={"/course/:id"} element={<Detail changeFlagApp={changeFlagApp} flagApp={flagApp} openModalLogin={openModalLogin}/>}></Route>
          <Route path={"/cart"} element={<Cart changeFlagApp={changeFlagApp}/>}></Route>
+         <Route path={"/paymentSuccess"} element={<PurchasedSuccessfully changeFlagApp={changeFlagApp}/>}></Route>
+         <Route path={"/order"} element={<Order changeFlagApp={changeFlagApp}/>}></Route>
      </Routes>
        <Footer/>
    </BrowserRouter>
        {isShowLogin && (<Login closeModalLogin={closeModalLogin} changeFlagApp={changeFlagApp}/>)}
+       </UserDataProvider>
    </>
   );
 }

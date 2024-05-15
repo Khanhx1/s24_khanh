@@ -25,7 +25,7 @@ public class CourseController {
                                     @RequestParam(value = "name", defaultValue = "") String name,
                                     @RequestParam(value = "sort", defaultValue = "") String sort,
                                     @RequestParam(value = "category", defaultValue = "") String category) {
-        Pageable pageable = PageRequest.of(page, 3);
+        Pageable pageable = PageRequest.of(page, 9);
         Page<Course> coursePage = iCourseService.getAll(pageable, name, sort, category);
         return new ResponseEntity<>(coursePage, HttpStatus.OK);
     }

@@ -8,7 +8,7 @@ import ReactPaginate from "react-paginate";
 import {Helmet} from "react-helmet";
 
 
-export function Course() {
+export function Course({changeFlagApp}) {
     const [courses, setCourses] = useState([]);
     const [searchCategory, setSearchCategory] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -55,6 +55,7 @@ export function Course() {
     const handleChangeSort = (event) => {
         setSort(event.target.value);
         setPage(0);
+        setDoS(!doS);
     }
 
     const handleChangeNameSearch = (event) => {
@@ -77,6 +78,7 @@ export function Course() {
         }
         setSearchCategory(list);
         setPage(0);
+        setDoS(!doS);
     }
 
     useEffect(() => {
@@ -90,6 +92,7 @@ export function Course() {
             const res = await CourseService.getAll(page, nameSearch, sort, searchCategory);
             setCourses(res.content);
             setTotalPages(res.totalPages);
+            changeFlagApp();
         } catch (e) {
             console.log(e);
         }
@@ -114,8 +117,8 @@ export function Course() {
                         <div className="cus-head-content d-flex justify-content-center col-12">
 
                             <div className="col-12 d-flex justify-content-end align-items-center c-b-1">
-                                <div className="cus-ban-1 col-lg-10 col-md-12 col-sm-12 col-12 mt-5">
-
+                                <div className="cus-ban-1 col-lg-10 col-md-12 col-sm-12 col-12 mt-5 d-flex justify-content-center align-items-center">
+                                    <h1 className="vss">Get Access now</h1>
                                 </div>
                                 <div className="col-lg-1 col-md-12 col-sm-12 col-12">
 
@@ -172,7 +175,6 @@ export function Course() {
                                                     }}>
                                                 <option value="">---</option>
                                                 <option value="popular">Popular</option>
-                                                <option value="newest">Newest</option>
                                                 <option value="lowestPrice">Lowest price</option>
                                                 <option value="highestPrice">Highest price</option>
                                             </select>
@@ -226,7 +228,7 @@ export function Course() {
                             </div>
 
                             <div className="col-1"></div>
-                            <div className="col-12 d-flex align-items-center">
+                            <div className="col-12 d-flex align-items-center mb-4">
                                 <div className="col-3"></div>
                                 <div className="col-8 d-flex justify-content-center align-items-center">
                                     <ReactPaginate
@@ -258,20 +260,6 @@ export function Course() {
                     </div>
                 </div>
 
-                <div>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                    <p>k</p>
-                </div>
 
 
             </div>

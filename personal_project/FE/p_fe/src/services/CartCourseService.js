@@ -19,3 +19,23 @@ export const deleteCartById = async (id) => {
         console.log(e);
     }
 }
+
+export const cleanAllCart = async () => {
+    try {
+        const res = await axiosCof.get(`http://localhost:8080/api/cart/clean`);
+        console.log(res.data)
+        return res.data;
+    }catch (e) {
+        console.log(e);
+    }
+}
+
+export const getBill = async () => {
+    try {
+        const res = await axiosCof.get(`http://localhost:8080/api/cart/bill`);
+        console.log(res.data)
+        return res.data;
+    }catch (e) {
+        console.log(e);
+    }
+}

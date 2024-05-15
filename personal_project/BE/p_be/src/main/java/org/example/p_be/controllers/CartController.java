@@ -1,10 +1,8 @@
 package org.example.p_be.controllers;
 
 import org.example.p_be.config.service.JwtService;
-import org.example.p_be.models.Course;
-import org.example.p_be.models.Customer;
-import org.example.p_be.models.OrderCourse;
-import org.example.p_be.models.User;
+import org.example.p_be.models.*;
+import org.example.p_be.repositories.IReceiptRepository;
 import org.example.p_be.repositories.IUserRepository;
 import org.example.p_be.services.ICartService;
 import org.example.p_be.services.ICourseService;
@@ -14,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -30,6 +29,8 @@ public class CartController {
 
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private IReceiptRepository iReceiptRepository;
 
     @GetMapping("/save")
     public ResponseEntity<?> saveToCart(@RequestParam("id") Integer id, @RequestHeader("Authorization") String token) {
@@ -100,4 +101,83 @@ public class CartController {
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
+    @GetMapping("/clean")
+    public ResponseEntity<?> cleanAllCart(@RequestHeader("Authorization") String token) {
+        String newToken = token.substring(7);
+        String username = jwtService.getUsernameFromJwtToken(newToken);
+        User user = iUserService.findUserByUsername(username);
+        Integer idCustomer = user.getCustomer().getId();
+
+        List<OrderCourse> orderCourseList = iCartService.findAllByCustomer(user.getCustomer());
+        int couuntk = 0;
+        Boolean valid = true;
+        for (OrderCourse orderCourse: orderCourseList) {
+            if (orderCourse.getReceipt() == null) {
+              couuntk++;
+            }
+        }
+        if (couuntk != 0) {
+            valid = true;
+        } else {
+            valid = false;
+        }
+
+        if (valid) {
+            String code = "";
+            int count = 0;
+            List<Receipt> receipts= iReceiptRepository.findAll();
+            do {
+                count = 0;
+                code = generateFiveDigitInteger();
+                for (Receipt receipt: receipts) {
+                    if (receipt.getCode().equals(code)){
+                        count++;
+                        break;
+                    }
+                }
+            } while (count != 0);
+
+            LocalDate date = LocalDate.now();
+            Receipt receipt = new Receipt();
+            receipt.setCode(code);
+            receipt.setTotalAmount(0);
+            receipt.setDate(date);
+            iReceiptRepository.save(receipt);
+
+            Receipt receipt1 = iReceiptRepository.findReceiptByCode(code);
+            Integer idReceipt = receipt1.getId();
+
+
+            iCartService.cleanAllCart(idCustomer, idReceipt);
+            return ResponseEntity.ok("clean all cart successfully");
+        }
+
+        return ResponseEntity.badRequest().build();
+
+
+    }
+
+    @GetMapping("/bill")
+    public ResponseEntity<?> getBill(@RequestHeader("Authorization") String token) {
+        String newToken = token.substring(7);
+        String username = jwtService.getUsernameFromJwtToken(newToken);
+        User user = iUserService.findUserByUsername(username);
+        Integer id = user.getCustomer().getId();
+        List<OrderCourse> orderCourses = iCartService.findAllBillByIdCustomer(id);
+        return new ResponseEntity<>(orderCourses, HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+    public String generateFiveDigitInteger() {
+        int randomNumber = (int) (Math.random() * 90000) + 10000;
+        return String.valueOf(randomNumber);
+    }
+
 }
+
+

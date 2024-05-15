@@ -191,10 +191,12 @@ input.custom-text-search::placeholder {
 .w-filter-c {
     cursor: pointer;
 }
+
 .cus-ban-1 {
-    background: #6c6b6b;
+    background: linear-gradient(to top, rgba(0, 0, 0, 10%) 75%, #000000 102%, #000000fa 10%), url("https://www.audiobuzz.com/wp-content/uploads/2022/05/music-for-commercials-and-ads-1728x890.jpg?1657640894");
     height: 200px;
     border-radius: 5px;
+    background-size: cover;
 
 }
 .c-b-1 {
@@ -258,4 +260,8 @@ input.custom-text-search::placeholder {
     color: rgba(255, 255, 255, 0.3);
     font-size: 15px !important;
     padding-left: 3px;
+}
+.vss {
+    color: white;
+    cursor: pointer;
 }
